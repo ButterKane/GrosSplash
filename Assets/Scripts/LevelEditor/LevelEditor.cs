@@ -9,6 +9,7 @@ public class LevelEditor : MonoBehaviour
     
     //Auto found references
     [HideInInspector] public Library library;
+    [HideInInspector] public LoaderSaverManager loaderSaverManager;
 
     //Manually found references
     [Header("References")]
@@ -20,6 +21,8 @@ public class LevelEditor : MonoBehaviour
     [Header("Debug values, don't change them")]
     public Tile hoveredTile;
     public TileData selectedTileData;
+
+    public Tile[,] tileGrid;
    
     //Private values
     private Transform gridParent;
@@ -64,7 +67,7 @@ public class LevelEditor : MonoBehaviour
     {
         if (hoveredTile != null)
         {
-            hoveredTile.ChangeTileData(null);
+            hoveredTile.ChangeTileData(library.defaultTile);
         }
     }
 
@@ -82,15 +85,30 @@ public class LevelEditor : MonoBehaviour
         hoveredTile = null;
     }
 
+    public void GenerateGridUsingSave(Save save)
+    {
+        Vector2Int gridSize = new Vector2Int(save.tileGrid[0].Length, save.tileGrid[1].Length);
+        GenerateGrid(gridSize, save.tileSize);
+
+        for (int x = 0; x < gridSize.x; x++)
+        {
+            for (int y = 0; y < gridSize.y; y++)
+            {
+                tileGrid[x, y].ChangeTileData(library.GetTileDataFromID(save.tileGrid[x][y]));
+            }
+        }
+    }
+
     public void GenerateGridUsingInputfield()
     {
-        Vector2 gridSize = new Vector2(int.Parse(levelSizeXInput.text), int.Parse(levelSizeYInput.text));
+        Vector2Int gridSize = new Vector2Int(int.Parse(levelSizeXInput.text), int.Parse(levelSizeYInput.text));
         float tileSize = int.Parse(tileSizeInput.text);
         GenerateGrid(gridSize, tileSize);
     }
 
-    private void GenerateGrid(Vector2 gridSize, float tileSize)
+    private void GenerateGrid(Vector2Int gridSize, float tileSize)
     {
+        tileGrid = new Tile[gridSize.x, gridSize.y];
         //Check for errors
         if (gridSize == null) { Debug.LogWarning("Tried to create a grid with incorrect size"); }
         if (tileSize <= 0) { Debug.LogWarning("Tried to create a grid with incorrect tile size"); }
@@ -106,20 +124,38 @@ public class LevelEditor : MonoBehaviour
 
         //Generates the tiles
         GameObject emptyCellPrefab = library.emptyGridCellPrefab;
-        float xPosition = 0;
+        int xPosition = Mathf.RoundToInt(-gridSize.x / 2);
         for (int x = 0; x < gridSize.x; x++)
         {
-            float yPosition = 0;
+            int yPosition = Mathf.RoundToInt(-gridSize.y / 2);
             for (int y = 0; y < gridSize.y; y++)
             {
                 Vector3 newCellPosition = new Vector3(xPosition * tileSize, 0, yPosition * tileSize);
                 GameObject newEmptyCell = Instantiate(emptyCellPrefab, gridParent);
+                Tile generatedTileScript = newEmptyCell.GetComponent<Tile>();
+                generatedTileScript.coordinates = new Vector2Int(x, y);
+                generatedTileScript.ChangeTileData(library.defaultTile);
                 newEmptyCell.transform.position = newCellPosition;
-                if (yPosition <= 0) { yPosition--; }
-                yPosition = -yPosition;
+                tileGrid[x, y] = generatedTileScript;
+                yPosition++;
             }
-            xPosition = -xPosition;
-            if (xPosition <= 0) { xPosition--; }
+            xPosition++;
         }
+    }
+
+    public int[][] ConvertTileGridToID(Tile[,] tileGrid)
+    {
+        int[][] newGrid = new int[tileGrid.GetLength(0)][];
+        for (int i = 0; i < tileGrid.GetLength(0) ; i++) {
+            newGrid[i] = new int[tileGrid.GetLength(1)];
+        }
+        for (int x = 0; x < tileGrid.GetLength(0); x++)
+        {
+            for (int y = 0; y < tileGrid.GetLength(1); y++)
+            {
+                newGrid[x][y] = tileGrid[x, y].GetTileData().ID;
+            }
+        }
+        return newGrid;
     }
 }

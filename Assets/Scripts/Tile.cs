@@ -3,6 +3,7 @@
 public class Tile : MonoBehaviour
 {
     private TileData tileData;
+    public Vector2Int coordinates;
 
     public void ChangeTileData(TileData newTileData)
     {
@@ -10,13 +11,14 @@ public class Tile : MonoBehaviour
         UpdateTile();
     }
 
+    public TileData GetTileData()
+    {
+        return tileData;
+    }
+
     public void UpdateTile()
     {
-        if (tileData == null)
-        {
-            GetComponent<SpriteRenderer>().sprite = LevelEditor.i.library.emptyTileTexture;
-        } else {
-            GetComponent<SpriteRenderer>().sprite = tileData.sprite;
-        }
+        if (tileData == null) { return; }
+        GetComponent<SpriteRenderer>().sprite = tileData.sprite;
     }
 }

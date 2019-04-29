@@ -9,7 +9,7 @@ public class Library : MonoBehaviour
     public GameObject emptyGridCellPrefab;
     public GameObject tilePanelPrefab;
     public Transform tileSelectionPanelParent;
-    public Sprite emptyTileTexture;
+    public TileData defaultTile;
 
     private List<Transform> tilesPanel = new List<Transform>();
 
@@ -21,6 +21,18 @@ public class Library : MonoBehaviour
     private void Awake()
     {
         GenerateTileListPanel();
+    }
+
+    public TileData GetTileDataFromID(int ID)
+    {
+        foreach (TileData tile in tileList)
+        {
+            if (tile.ID == ID)
+            {
+                return tile;
+            }
+        }
+        return null;
     }
 
     private void Update()

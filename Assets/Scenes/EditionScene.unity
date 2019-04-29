@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 175203967}
   - component: {fileID: 175203966}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: BUTTON_Load
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -511,7 +511,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 175203967}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2072315352}
+        m_MethodName: LoadLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &175203967
@@ -564,7 +575,7 @@ GameObject:
   - component: {fileID: 317457825}
   - component: {fileID: 317457824}
   m_Layer: 5
-  m_Name: LevelNameInput
+  m_Name: LevelNameToSave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -787,7 +798,7 @@ GameObject:
   - component: {fileID: 620979890}
   - component: {fileID: 620979889}
   m_Layer: 5
-  m_Name: Button
+  m_Name: BUTTON_Save
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -855,7 +866,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 620979890}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2072315352}
+        m_MethodName: SaveLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &620979890
@@ -1466,6 +1488,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   library: {fileID: 0}
+  loaderSaverManager: {fileID: 0}
   levelSizeXInput: {fileID: 1002452129}
   levelSizeYInput: {fileID: 1276486019}
   tileSizeInput: {fileID: 1403478600}
@@ -1498,7 +1521,7 @@ GameObject:
   - component: {fileID: 1189875718}
   - component: {fileID: 1189875717}
   m_Layer: 5
-  m_Name: LevelNameInput (1)
+  m_Name: LevelNameToLoad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3446,6 +3469,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2058929596}
   m_CullTransparentMesh: 0
+--- !u!1 &2072315351
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2072315353}
+  - component: {fileID: 2072315352}
+  m_Layer: 0
+  m_Name: SaveLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2072315352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072315351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf2f7dfba5be51046bbfbe4ae0cb0a28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveNameInputField: {fileID: 317457824}
+  loadNameInputField: {fileID: 1189875717}
+--- !u!4 &2072315353
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072315351}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.961792, y: -0.0012207031, z: 2.0456543}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2721397142741941611
 GameObject:
   m_ObjectHideFlags: 0
@@ -3549,7 +3617,7 @@ PrefabInstance:
     - target: {fileID: 7517263585523173667, guid: 7943070088927314882656d8da73fbde,
         type: 3}
       propertyPath: tileList.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7943070088927314882656d8da73fbde, type: 3}
@@ -3571,8 +3639,9 @@ MonoBehaviour:
   tilePanelPrefab: {fileID: 6232836921706792703, guid: 45ca56de00400a7489cd3ad7787432a9,
     type: 3}
   tileSelectionPanelParent: {fileID: 13104767}
-  emptyTileTexture: {fileID: 21300000, guid: 242069be168b3d2438a44d0e5e402d2b, type: 3}
+  defaultTile: {fileID: 11400000, guid: b9e089543987bae438a4fef8b02cadf4, type: 2}
   tileList:
+  - {fileID: 11400000, guid: b9e089543987bae438a4fef8b02cadf4, type: 2}
   - {fileID: 11400000, guid: d8e035168b698214b95a679215e41af7, type: 2}
   - {fileID: 11400000, guid: b6184817c538d8a498f94e70fd43ff2c, type: 2}
   - {fileID: 11400000, guid: e17eb0dbc431da44cade92088fa16166, type: 2}

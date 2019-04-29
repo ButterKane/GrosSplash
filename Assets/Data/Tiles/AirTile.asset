@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83dd2a49eaa8c7a459bf69cd311b97a2, type: 3}
-  m_Name: DebugTileData3
+  m_Name: AirTile
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 20cfd110e04a6e44c97d096dd2dbdccb, type: 3}
+  ID: 0
+  sprite: {fileID: 21300000, guid: 242069be168b3d2438a44d0e5e402d2b, type: 3}
   inflammable: 0
-  canStepOnIt: 1
+  canStepOnIt: 0

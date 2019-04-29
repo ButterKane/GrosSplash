@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Tile", menuName = "Tile", order = 1)]
+[CreateAssetMenu(fileName = "TileData", menuName = "TileData", order = 1)]
 public class TileData : ScriptableObject
 {
-    public Texture texture;
+    public Sprite sprite;
     public bool inflammable = false;
     public bool canStepOnIt = true;
 }

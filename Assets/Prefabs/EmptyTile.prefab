@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 6524192117709660158}
   - component: {fileID: 8912186800124391547}
   - component: {fileID: 568311985873137808}
+  - component: {fileID: 4344297724994332015}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: EmptyTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,3 +94,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.0000002, z: 0.29189315}
   m_Center: {x: 0, y: -2.9193096e-16, z: 0.14554279}
+--- !u!114 &4344297724994332015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3907840851689547684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 485bee38a576b384d80c34a85ee6fde3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

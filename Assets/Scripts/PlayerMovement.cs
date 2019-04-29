@@ -112,8 +112,10 @@ public class PlayerMovement : MonoBehaviour
 
     void GamepadInput()
     {
-        Vector3 _inputX = Input.GetAxisRaw("Horizontal_" + inputIndex.ToString()) * cam.transform.right;
-        Vector3 _inputZ = Input.GetAxisRaw("Vertical_" + inputIndex.ToString()) * cam.transform.forward;
+        //Vector3 _inputX = Input.GetAxisRaw("Horizontal_" + inputIndex.ToString()) * cam.transform.right;
+        //Vector3 _inputZ = Input.GetAxisRaw("Vertical_" + inputIndex.ToString()) * cam.transform.forward;
+        Vector3 _inputX = Input.GetAxisRaw("Horizontal") * cam.transform.right;
+        Vector3 _inputZ = Input.GetAxisRaw("Vertical") * cam.transform.forward;
         input = _inputX + _inputZ;
         input.y = 0;
         input = input.normalized * ((input.magnitude - deadzone) / (1 - deadzone));
@@ -122,8 +124,10 @@ public class PlayerMovement : MonoBehaviour
 
     void KeyboardInput()
     {
-        Vector3 _inputX = Input.GetAxisRaw("Horizontal_" + inputIndex.ToString()) * cam.transform.right;
-        Vector3 _inputZ = Input.GetAxisRaw("Vertical_" + inputIndex.ToString()) * cam.transform.forward;
+        //Vector3 _inputX = Input.GetAxisRaw("Horizontal_" + inputIndex.ToString()) * cam.transform.right;
+        //Vector3 _inputZ = Input.GetAxisRaw("Vertical_" + inputIndex.ToString()) * cam.transform.forward;
+        Vector3 _inputX = Input.GetAxisRaw("Horizontal") * cam.transform.right;
+        Vector3 _inputZ = Input.GetAxisRaw("Vertical") * cam.transform.forward;
         input = _inputX + _inputZ;
         input.y = 0;
         input.Normalize();

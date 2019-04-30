@@ -19,7 +19,8 @@ public class PlayerMovement : MonoBehaviour
     public float deadzone = 0.2f;
     public Animator playerAnim;
     public Camera cam;
-    public ParticleSystem particles;
+    public ParticleSystem highIntensityParticles;
+    public ParticleSystem lowIntensityParticles;
 
     [Space(2)]
     [Header("General settings")]
@@ -51,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Space(2)]
     [Header("Debug")]
+    ParticleSystem actualParticleSystem;
     public int currentHP;
     Vector3 speedVector;
     float accelerationTimer;
@@ -74,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
         customDrag = idleDrag;
         currentHP = MaxHP;
         maxSpeed = maxSpeedMin;
+        actualParticleSystem = lowIntensityParticles;
     }
 
     void Update()
@@ -134,6 +137,11 @@ public class PlayerMovement : MonoBehaviour
         aim = aim.normalized;
 
         rTrigger = Input.GetAxis("RTrigger");
+
+        if (Input.GetButtonDown("SwitchWeapon"))
+        {
+            SwitchWeapon();
+        }
     }
 
     void KeyboardInput()
@@ -180,10 +188,10 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    //private void UpdateAnimatorBlendTree()
-    //{
-    //    playerAnim.SetFloat("IdleRunningBlend", speed / maxSpeed);
-    //}
+    private void UpdateAnimatorBlendTree()
+    {
+        playerAnim.SetFloat("IdleRunningBlend", speed / maxSpeed);
+    }
 
     void Rotate() //Rotate according to Aim Input
     {
@@ -191,18 +199,6 @@ public class PlayerMovement : MonoBehaviour
             turnRotation = Quaternion.Euler(0, Mathf.Atan2(aim.x, -aim.z) * 180 / Mathf.PI, 0);
 
         self.rotation = Quaternion.Slerp(transform.rotation, turnRotation, turnSpeed);
-    }
-
-    void Shoot()
-    {
-        if (rTrigger > 0.2f)
-        {
-            particles.Play();
-        }
-        else
-        {
-            particles.Stop();
-        }
     }
 
     void Accelerate()
@@ -223,8 +219,6 @@ public class PlayerMovement : MonoBehaviour
         speed = body.velocity.magnitude;
     }
 
-
-
     void ApplyDrag()
     {
         Vector3 myVel = body.velocity;
@@ -237,5 +231,35 @@ public class PlayerMovement : MonoBehaviour
     {
         body.AddForce(new Vector3(0, -9.81f * customGravity, 0));
     }
+    #endregion
+
+    #region Actions
+
+    void Shoot()
+    {
+        if (rTrigger > 0.2f)
+        {
+            actualParticleSystem.Play();
+        }
+        else
+        {
+            actualParticleSystem.Stop();
+        }
+    }
+
+    void SwitchWeapon()
+    {
+        if (actualParticleSystem == highIntensityParticles)
+        {
+            actualParticleSystem.Stop();
+            actualParticleSystem = lowIntensityParticles;
+        }
+        else
+        {
+            actualParticleSystem.Stop();
+            actualParticleSystem = highIntensityParticles;
+        }
+    }
+
     #endregion
 }

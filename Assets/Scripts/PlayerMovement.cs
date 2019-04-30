@@ -34,10 +34,9 @@ public class PlayerMovement : MonoBehaviour
     public MoveState moveState;
     public AnimationCurve accelerationCurve;
 
-
     [Tooltip("Minimum required speed to go to walking state")] public float minWalkSpeed = 0.1f;
-    public float maxSpeedMin = 9;
-    public float maxSpeedMax = 11;
+    public float maxSpeedIdle = 9;
+    public float maxSpeedShooting;
     public float maxAcceleration = 10;
 
     [Space(2)]
@@ -68,6 +67,8 @@ public class PlayerMovement : MonoBehaviour
     float maxSpeed;
     bool isJumping;
     float rTrigger;
+    bool shootAble = true;
+    bool shooting;
 
 
     private void Awake()
@@ -75,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
         customGravity = onGroundGravityMultiplyer;
         customDrag = idleDrag;
         currentHP = MaxHP;
-        maxSpeed = maxSpeedMin;
+        maxSpeed = maxSpeedIdle;
         actualParticleSystem = lowIntensityParticles;
     }
 
@@ -102,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
         Move();
         ApplyDrag();
         ApplyCustomGravity();
-        //UpdateAnimatorBlendTree();
+        UpdateAnimatorBlendTree();
     }
 
     #region Input
@@ -140,7 +141,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("SwitchWeapon"))
         {
-            SwitchWeapon();
+            StartCoroutine(SwitchWeapon());
         }
     }
 
@@ -195,8 +196,16 @@ public class PlayerMovement : MonoBehaviour
 
     void Rotate() //Rotate according to Aim Input
     {
-        if (aim.magnitude >= 0.1f)
-            turnRotation = Quaternion.Euler(0, Mathf.Atan2(aim.x, -aim.z) * 180 / Mathf.PI, 0);
+        if (shooting)
+        {
+            if (aim.magnitude >= 0.1f)
+                turnRotation = Quaternion.Euler(0, Mathf.Atan2(aim.x, -aim.z) * 180 / Mathf.PI, 0);
+        }
+        else
+        {
+            if (input.magnitude >= 0.1f)
+                turnRotation = Quaternion.Euler(0, Mathf.Atan2(input.x, input.z) * 180 / Mathf.PI, 0);
+        }
 
         self.rotation = Quaternion.Slerp(transform.rotation, turnRotation, turnSpeed);
     }
@@ -237,17 +246,26 @@ public class PlayerMovement : MonoBehaviour
 
     void Shoot()
     {
-        if (rTrigger > 0.2f)
+        if (shootAble)
         {
-            actualParticleSystem.Play();
+            if (aim.magnitude>0.1f)
+            {
+                actualParticleSystem.Play();
+                maxSpeed = maxSpeedShooting;
+                shooting = true;
+            }
+            else
+            {
+                actualParticleSystem.Stop();
+                maxSpeed = maxSpeedIdle;
+                shooting = false;
+            }
         }
         else
-        {
-            actualParticleSystem.Stop();
-        }
+            shooting = false;
     }
 
-    void SwitchWeapon()
+    IEnumerator SwitchWeapon()
     {
         if (actualParticleSystem == highIntensityParticles)
         {
@@ -259,6 +277,9 @@ public class PlayerMovement : MonoBehaviour
             actualParticleSystem.Stop();
             actualParticleSystem = highIntensityParticles;
         }
+        shootAble = false;
+        yield return new WaitForSeconds(.5f);
+        shootAble = true;
     }
 
     #endregion

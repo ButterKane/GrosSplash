@@ -161,8 +161,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   minWalkSpeed: 0.1
-  maxSpeedMin: 9
-  maxSpeedMax: 11
+  maxSpeedIdle: 9
+  maxSpeedShooting: 4
   maxAcceleration: 200
   movingDrag: 0.1
   idleDrag: 0.4

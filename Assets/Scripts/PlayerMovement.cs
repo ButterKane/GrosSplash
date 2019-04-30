@@ -19,7 +19,8 @@ public class PlayerMovement : MonoBehaviour
     public float deadzone = 0.2f;
     public Animator playerAnim;
     public Camera cam;
-    public ParticleSystem particles;
+    public ParticleSystem highIntensityParticles;
+    public ParticleSystem lowIntensityParticles;
 
     [Space(2)]
     [Header("General settings")]
@@ -33,10 +34,9 @@ public class PlayerMovement : MonoBehaviour
     public MoveState moveState;
     public AnimationCurve accelerationCurve;
 
-
     [Tooltip("Minimum required speed to go to walking state")] public float minWalkSpeed = 0.1f;
-    public float maxSpeedMin = 9;
-    public float maxSpeedMax = 11;
+    public float maxSpeedIdle = 9;
+    public float maxSpeedShooting;
     public float maxAcceleration = 10;
 
     [Space(2)]
@@ -51,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Space(2)]
     [Header("Debug")]
+    ParticleSystem actualParticleSystem;
     public int currentHP;
     Vector3 speedVector;
     float accelerationTimer;
@@ -66,6 +67,8 @@ public class PlayerMovement : MonoBehaviour
     float maxSpeed;
     bool isJumping;
     float rTrigger;
+    bool shootAble = true;
+    bool shooting;
 
 
     private void Awake()
@@ -73,7 +76,8 @@ public class PlayerMovement : MonoBehaviour
         customGravity = onGroundGravityMultiplyer;
         customDrag = idleDrag;
         currentHP = MaxHP;
-        maxSpeed = maxSpeedMin;
+        maxSpeed = maxSpeedIdle;
+        actualParticleSystem = lowIntensityParticles;
     }
 
     void Update()
@@ -99,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
         Move();
         ApplyDrag();
         ApplyCustomGravity();
-        //UpdateAnimatorBlendTree();
+        UpdateAnimatorBlendTree();
     }
 
     #region Input
@@ -134,6 +138,11 @@ public class PlayerMovement : MonoBehaviour
         aim = aim.normalized;
 
         rTrigger = Input.GetAxis("RTrigger");
+
+        if (Input.GetButtonDown("SwitchWeapon"))
+        {
+            StartCoroutine(SwitchWeapon());
+        }
     }
 
     void KeyboardInput()
@@ -180,29 +189,25 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    //private void UpdateAnimatorBlendTree()
-    //{
-    //    playerAnim.SetFloat("IdleRunningBlend", speed / maxSpeed);
-    //}
+    private void UpdateAnimatorBlendTree()
+    {
+        playerAnim.SetFloat("IdleRunningBlend", speed / maxSpeed);
+    }
 
     void Rotate() //Rotate according to Aim Input
     {
-        if (aim.magnitude >= 0.1f)
-            turnRotation = Quaternion.Euler(0, Mathf.Atan2(aim.x, -aim.z) * 180 / Mathf.PI, 0);
-
-        self.rotation = Quaternion.Slerp(transform.rotation, turnRotation, turnSpeed);
-    }
-
-    void Shoot()
-    {
-        if (rTrigger > 0.2f)
+        if (shooting)
         {
-            particles.Play();
+            if (aim.magnitude >= 0.1f)
+                turnRotation = Quaternion.Euler(0, Mathf.Atan2(aim.x, -aim.z) * 180 / Mathf.PI, 0);
         }
         else
         {
-            particles.Stop();
+            if (input.magnitude >= 0.1f)
+                turnRotation = Quaternion.Euler(0, Mathf.Atan2(input.x, input.z) * 180 / Mathf.PI, 0);
         }
+
+        self.rotation = Quaternion.Slerp(transform.rotation, turnRotation, turnSpeed);
     }
 
     void Accelerate()
@@ -223,8 +228,6 @@ public class PlayerMovement : MonoBehaviour
         speed = body.velocity.magnitude;
     }
 
-
-
     void ApplyDrag()
     {
         Vector3 myVel = body.velocity;
@@ -237,5 +240,52 @@ public class PlayerMovement : MonoBehaviour
     {
         body.AddForce(new Vector3(0, -9.81f * customGravity, 0));
     }
+    #endregion
+
+    #region Actions
+
+    void Shoot()
+    {
+        if (shootAble)
+        {
+            if (aim.magnitude>0.1f)
+            {
+                actualParticleSystem.Play();
+                maxSpeed = maxSpeedShooting;
+                shooting = true;
+                playerAnim.SetBool("Shooting", true);
+            }
+            else
+            {
+                actualParticleSystem.Stop();
+                maxSpeed = maxSpeedIdle;
+                shooting = false;
+                playerAnim.SetBool("Shooting", false);
+            }
+        }
+        else
+        {
+            shooting = false;
+            playerAnim.SetBool("Shooting", false);
+        }
+    }
+
+    IEnumerator SwitchWeapon()
+    {
+        if (actualParticleSystem == highIntensityParticles)
+        {
+            actualParticleSystem.Stop();
+            actualParticleSystem = lowIntensityParticles;
+        }
+        else
+        {
+            actualParticleSystem.Stop();
+            actualParticleSystem = highIntensityParticles;
+        }
+        shootAble = false;
+        yield return new WaitForSeconds(.5f);
+        shootAble = true;
+    }
+
     #endregion
 }

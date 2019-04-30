@@ -288,7 +288,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1214253049}
   m_LocalRotation: {x: 0.4018264, y: -0, z: -0, w: 0.9157159}
-  m_LocalPosition: {x: 0, y: 10.2, z: -10}
+  m_LocalPosition: {x: 0, y: 12.2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -393,11 +393,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8061476558589672420, guid: 218a241db58f56849816014d9aa8d204,
+    - target: {fileID: 1505349034978992986, guid: 218a241db58f56849816014d9aa8d204,
         type: 3}
-      propertyPath: m_Name
-      value: P_Player
-      objectReference: {fileID: 0}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: fd01673bb5668ed43bdabf72758a134c, type: 2}
     - target: {fileID: 8061476558589672409, guid: 218a241db58f56849816014d9aa8d204,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -453,10 +453,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8061476558589672420, guid: 218a241db58f56849816014d9aa8d204,
+        type: 3}
+      propertyPath: m_Name
+      value: P_Player
+      objectReference: {fileID: 0}
     - target: {fileID: 8061476558589672421, guid: 218a241db58f56849816014d9aa8d204,
         type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 1214253051}
+    - target: {fileID: 1085968452, guid: 218a241db58f56849816014d9aa8d204, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1085968452, guid: 218a241db58f56849816014d9aa8d204, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 218a241db58f56849816014d9aa8d204, type: 3}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 941430145170209204}
   - component: {fileID: 7139417880575313881}
   m_Layer: 5
-  m_Name: TileSprite
+  m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,9 +85,8 @@ GameObject:
   - component: {fileID: 5851616644378723717}
   - component: {fileID: 1461049399078547174}
   - component: {fileID: 459790397056054410}
-  - component: {fileID: 7276386386631299427}
   m_Layer: 0
-  m_Name: TilePanel
+  m_Name: P_PaneObj
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,7 +99,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6232836921706792703}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -106.3125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -152,16 +151,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 1
---- !u!114 &7276386386631299427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6232836921706792703}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee6c78195f308a24c97a9a35388c6854, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  linkedData: {fileID: 0}

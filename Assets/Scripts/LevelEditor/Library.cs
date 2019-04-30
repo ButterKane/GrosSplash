@@ -7,20 +7,23 @@ using System.Linq;
 public class Library : MonoBehaviour
 {
     public GameObject emptyGridCellPrefab;
-    public GameObject tilePanelPrefab;
-    public Transform tileSelectionPanelParent;
+    public GameObject panelObjPrefab;
     public TileData defaultTile;
-
-    private List<Transform> tilesPanel = new List<Transform>();
 
 
 
     public List<TileData> tileList;
+    public List<WallData> wallList;
+    public List<GameplayObjData> gameplayObjList;
+    public List<PropData> propList;
 
 
     private void Awake()
     {
         GenerateTileListPanel();
+        GenerateWallListPanel();
+        GenerateGameplayObjListPanel();
+        GeneratePropListPanel();
     }
 
     public TileData GetTileDataFromID(int ID)
@@ -35,75 +38,131 @@ public class Library : MonoBehaviour
         return null;
     }
 
+    public WallData GetWallDataFromID(int ID)
+    {
+        foreach (WallData wall in wallList)
+        {
+            if (wall.ID == ID)
+            {
+                return wall;
+            }
+        }
+        return null;
+    }
+
+    public PropData GetPropDataFromID(int ID)
+    {
+        foreach (PropData prop in propList)
+        {
+            if (prop.ID == ID)
+            {
+                return prop;
+            }
+        }
+        return null;
+    }
+
     private void Update()
     {
         if (Input.GetAxisRaw("Mouse ScrollWheel") < 0)
         {
-            ScrollTilePanelUp();
+            ScrollPanelUp(LevelEditor.i.selectedTool.objectList.transform);
         }
         else if (Input.GetAxisRaw("Mouse ScrollWheel") > 0)
         {
-            ScrollTilePanelDown();
+            ScrollPanelDown(LevelEditor.i.selectedTool.objectList.transform);
         }
     }
 
     public void GenerateTileListPanel()
     {
-        tilesPanel.Clear();
+        Transform panelParent = LevelEditor.i.toolSelector.GetToolByName("TILE").objectList;
         for (int i = 0; i < tileList.Count; i++)
         {
-            GameObject newTile = Instantiate(tilePanelPrefab, tileSelectionPanelParent);
-            newTile.transform.Find("TileSprite").GetComponent<Image>().sprite = tileList[i].sprite;
-            newTile.GetComponent<TilePanel>().linkedData = tileList[i];
-            tilesPanel.Add(newTile.transform);
+            GameObject newObj = Instantiate(panelObjPrefab, panelParent);
+            newObj.transform.Find("Sprite").GetComponent<Image>().sprite = tileList[i].sprite;
+            newObj.name = "Tile " +i;
+            TilePanel newObjScript = newObj.AddComponent<TilePanel>();
+            newObjScript.linkedData = tileList[i];
         }
-        LayoutRebuilder.ForceRebuildLayoutImmediate(tileSelectionPanelParent.GetComponent<RectTransform>());
-        UpdateSelectedTileType();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(panelParent.GetComponent<RectTransform>());
+        UpdateSelectedObject();
     }
 
-    public void UpdateSelectedTileType()
+    public void GenerateWallListPanel()
     {
-        if (tilesPanel == null) { return; }
-        if (tilesPanel.Count > 3)
+        Transform panelParent = LevelEditor.i.toolSelector.GetToolByName("WALL").objectList;
+        for (int i = 0; i < wallList.Count; i++)
         {
-            LevelEditor.i.selectedTileData = tilesPanel[2].GetComponent<TilePanel>().linkedData;
-        } else
+            GameObject newObj = Instantiate(panelObjPrefab, panelParent);
+            newObj.transform.Find("Sprite").GetComponent<Image>().sprite = wallList[i].sprite;
+            newObj.name = "Wall " + i;
+            WallPanel newObjScript = newObj.AddComponent<WallPanel>();
+            newObjScript.linkedData = wallList[i];
+        }
+        LayoutRebuilder.ForceRebuildLayoutImmediate(panelParent.GetComponent<RectTransform>());
+        UpdateSelectedObject();
+    }
+
+    public void GenerateGameplayObjListPanel()
+    {
+        Transform panelParent = LevelEditor.i.toolSelector.GetToolByName("GAMEPLAY").objectList;
+        for (int i = 0; i < gameplayObjList.Count; i++)
         {
-            LevelEditor.i.selectedTileData = tilesPanel[0].GetComponent<TilePanel>().linkedData;
+            GameObject newObj = Instantiate(panelObjPrefab, panelParent);
+            newObj.transform.Find("Sprite").GetComponent<Image>().sprite = gameplayObjList[i].sprite;
+            newObj.name = "Gameplay Object " + i;
+            GameplayObjPanel newObjScript = newObj.AddComponent<GameplayObjPanel>();
+            newObjScript.linkedData = gameplayObjList[i];
+        }
+        LayoutRebuilder.ForceRebuildLayoutImmediate(panelParent.GetComponent<RectTransform>());
+        UpdateSelectedObject();
+    }
+
+    public void GeneratePropListPanel()
+    {
+        Transform panelParent = LevelEditor.i.toolSelector.GetToolByName("PROP").objectList;
+        for (int i = 0; i < propList.Count; i++)
+        {
+            GameObject newObj = Instantiate(panelObjPrefab, panelParent);
+            newObj.transform.Find("Sprite").GetComponent<Image>().sprite = propList[i].sprite;
+            newObj.name = "Prop " + i;
+            PropPanel newObjScript = newObj.AddComponent<PropPanel>();
+            newObjScript.linkedData = propList[i];
+        }
+        LayoutRebuilder.ForceRebuildLayoutImmediate(panelParent.GetComponent<RectTransform>());
+        UpdateSelectedObject();
+    }
+
+    public void UpdateSelectedObject()
+    {
+        if (LevelEditor.i.selectedTool == null) { return; }
+        switch (LevelEditor.i.selectedTool.toolName)
+        {
+            case "TILE":
+                LevelEditor.i.selectedTileData = LevelEditor.i.selectedTool.objectList.transform.GetChild(2).GetComponent<TilePanel>().linkedData;
+                break;
+            case "WALL":
+                LevelEditor.i.selectedWallData = LevelEditor.i.selectedTool.objectList.transform.GetChild(2).GetComponent<WallPanel>().linkedData;
+                break;
+            case "GAMEPLAY":
+                LevelEditor.i.selectedGameplayObjData = LevelEditor.i.selectedTool.objectList.transform.GetChild(2).GetComponent<GameplayObjPanel>().linkedData;
+                break;
+            case "PROP":
+                LevelEditor.i.selectedPropData = LevelEditor.i.selectedTool.objectList.transform.GetChild(2).GetComponent<PropPanel>().linkedData;
+                break;
         }
     }
 
-    public void ScrollTilePanelUp()
+    public void ScrollPanelUp(Transform panel)
     {
-        Transform[] tempTilesPanel = new Transform[tilesPanel.Count];
-        for (int i = tilesPanel.Count-1; i >= 0; i--)
-        {
-            int newTileIndex = i - 1;
-            if (newTileIndex < 0)
-            {
-                newTileIndex = tilesPanel.Count-1;
-            }
-            tempTilesPanel[newTileIndex] = tilesPanel[i];
-            tilesPanel[i].SetSiblingIndex(newTileIndex);
-        }
-        tilesPanel = tempTilesPanel.ToList();
-        UpdateSelectedTileType();
+        panel.GetChild(0).SetAsLastSibling();
+        UpdateSelectedObject();
     }
 
-    public void ScrollTilePanelDown()
+    public void ScrollPanelDown(Transform panel)
     {
-        Transform[] tempTilesPanel = new Transform[tilesPanel.Count];
-        for (int i = 0; i < tilesPanel.Count; i++)
-        {
-            int newTileIndex = i + 1;
-            if (newTileIndex >= tilesPanel.Count)
-            {
-                newTileIndex = 0;
-            }
-            tempTilesPanel[newTileIndex] = tilesPanel[i];
-            tilesPanel[i].SetSiblingIndex(newTileIndex);
-        }
-        tilesPanel = tempTilesPanel.ToList();
-        UpdateSelectedTileType();
+        panel.GetChild(panel.childCount-1).SetAsFirstSibling();
+        UpdateSelectedObject();
     }
 }

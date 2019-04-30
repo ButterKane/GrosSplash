@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 8912186800124391547}
   - component: {fileID: 568311985873137808}
   - component: {fileID: 4344297724994332015}
-  m_Layer: 0
-  m_Name: EmptyTile
+  m_Layer: 8
+  m_Name: P_EmptyTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,3 +106,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 485bee38a576b384d80c34a85ee6fde3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coordinates: {x: 0, y: 0}

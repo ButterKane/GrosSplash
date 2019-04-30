@@ -253,16 +253,21 @@ public class PlayerMovement : MonoBehaviour
                 actualParticleSystem.Play();
                 maxSpeed = maxSpeedShooting;
                 shooting = true;
+                playerAnim.SetBool("Shooting", true);
             }
             else
             {
                 actualParticleSystem.Stop();
                 maxSpeed = maxSpeedIdle;
                 shooting = false;
+                playerAnim.SetBool("Shooting", false);
             }
         }
         else
+        {
             shooting = false;
+            playerAnim.SetBool("Shooting", false);
+        }
     }
 
     IEnumerator SwitchWeapon()

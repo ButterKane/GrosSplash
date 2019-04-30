@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public float deadzone = 0.2f;
     public Animator playerAnim;
     public Camera cam;
+    public ParticleSystem particles;
 
     [Space(2)]
     [Header("General settings")]
@@ -55,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
     float accelerationTimer;
     Vector3 lastVelocity;
     Vector3 input;
+    Vector3 aim;
     Quaternion turnRotation;
     float distance;
     bool inputDisabled;
@@ -63,6 +65,9 @@ public class PlayerMovement : MonoBehaviour
     float customGravity;
     float maxSpeed;
     bool isJumping;
+    float rTrigger;
+
+
     private void Awake()
     {
         customGravity = onGroundGravityMultiplyer;
@@ -81,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
     {
         CheckMoveState();
         Rotate();
+        Shoot();
         if (input.magnitude != 0)
         {
             accelerationTimer += Time.fixedDeltaTime;
@@ -93,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
         Move();
         ApplyDrag();
         ApplyCustomGravity();
-        UpdateAnimatorBlendTree();
+        //UpdateAnimatorBlendTree();
     }
 
     #region Input
@@ -114,12 +120,20 @@ public class PlayerMovement : MonoBehaviour
     {
         //Vector3 _inputX = Input.GetAxisRaw("Horizontal_" + inputIndex.ToString()) * cam.transform.right;
         //Vector3 _inputZ = Input.GetAxisRaw("Vertical_" + inputIndex.ToString()) * cam.transform.forward;
-        Vector3 _inputX = Input.GetAxisRaw("Horizontal") * cam.transform.right;
-        Vector3 _inputZ = Input.GetAxisRaw("Vertical") * cam.transform.forward;
-        input = _inputX + _inputZ;
+        Vector3 _inputX = Input.GetAxisRaw("LStickX") * cam.transform.right;
+        Vector3 _inputZ = Input.GetAxisRaw("LStickY") * cam.transform.forward;
+        input = _inputX - _inputZ;
         input.y = 0;
         input = input.normalized * ((input.magnitude - deadzone) / (1 - deadzone));
         Debug.DrawLine(transform.position, transform.position + input * 10);
+
+        Vector3 _aimX = Input.GetAxisRaw("RStickX") * cam.transform.right;
+        Vector3 _aimZ = Input.GetAxisRaw("RStickY") * cam.transform.forward;
+        aim = _aimX + _aimZ;
+        aim.y = 0;
+        aim = aim.normalized;
+
+        rTrigger = Input.GetAxis("RTrigger");
     }
 
     void KeyboardInput()
@@ -166,17 +180,29 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void UpdateAnimatorBlendTree()
-    {
-        playerAnim.SetFloat("IdleRunningBlend", speed / maxSpeed);
-    }
+    //private void UpdateAnimatorBlendTree()
+    //{
+    //    playerAnim.SetFloat("IdleRunningBlend", speed / maxSpeed);
+    //}
 
-    void Rotate()
+    void Rotate() //Rotate according to Aim Input
     {
-        if (input.magnitude >= 0.1f)
-            turnRotation = Quaternion.Euler(0, Mathf.Atan2(input.x, input.z) * 180 / Mathf.PI, 0);
+        if (aim.magnitude >= 0.1f)
+            turnRotation = Quaternion.Euler(0, Mathf.Atan2(aim.x, -aim.z) * 180 / Mathf.PI, 0);
 
         self.rotation = Quaternion.Slerp(transform.rotation, turnRotation, turnSpeed);
+    }
+
+    void Shoot()
+    {
+        if (rTrigger > 0.2f)
+        {
+            particles.Play();
+        }
+        else
+        {
+            particles.Stop();
+        }
     }
 
     void Accelerate()
@@ -196,6 +222,8 @@ public class PlayerMovement : MonoBehaviour
         body.velocity = myVel;
         speed = body.velocity.magnitude;
     }
+
+
 
     void ApplyDrag()
     {

@@ -248,7 +248,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (shootAble)
         {
-            if (aim.magnitude>0.1f)
+            if (aim.magnitude>0.3f)
             {
                 actualParticleSystem.Play();
                 maxSpeed = maxSpeedShooting;
@@ -265,6 +265,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            actualParticleSystem.Stop();
             shooting = false;
             playerAnim.SetBool("Shooting", false);
         }

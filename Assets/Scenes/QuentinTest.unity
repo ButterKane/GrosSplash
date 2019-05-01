@@ -393,6 +393,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8061476558589672420, guid: 218a241db58f56849816014d9aa8d204,
+        type: 3}
+      propertyPath: m_Name
+      value: P_Player
+      objectReference: {fileID: 0}
     - target: {fileID: 1505349034978992986, guid: 218a241db58f56849816014d9aa8d204,
         type: 3}
       propertyPath: m_Controller
@@ -453,16 +458,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8061476558589672420, guid: 218a241db58f56849816014d9aa8d204,
-        type: 3}
-      propertyPath: m_Name
-      value: P_Player
-      objectReference: {fileID: 0}
     - target: {fileID: 8061476558589672421, guid: 218a241db58f56849816014d9aa8d204,
         type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 1214253051}
+    - target: {fileID: 8061476558589672421, guid: 218a241db58f56849816014d9aa8d204,
+        type: 3}
+      propertyPath: walkAnimationSpeedCurve.m_Curve.Array.data[0].inSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8061476558589672421, guid: 218a241db58f56849816014d9aa8d204,
+        type: 3}
+      propertyPath: walkAnimationSpeedCurve.m_Curve.Array.data[0].outSlope
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8061476558589672421, guid: 218a241db58f56849816014d9aa8d204,
+        type: 3}
+      propertyPath: walkAnimationSpeedCurve.m_Curve.Array.data[1].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8061476558589672421, guid: 218a241db58f56849816014d9aa8d204,
+        type: 3}
+      propertyPath: walkAnimationSpeedCurve.m_Curve.Array.data[1].outSlope
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1085968452, guid: 218a241db58f56849816014d9aa8d204, type: 3}
       propertyPath: playOnAwake
       value: 0

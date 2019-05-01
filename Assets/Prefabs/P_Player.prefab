@@ -165,8 +165,8 @@ MonoBehaviour:
   deadzone: 0.2
   playerAnim: {fileID: 1505349034978992986}
   cam: {fileID: 0}
-  highIntensityParticles: {fileID: 0}
-  lowIntensityParticles: {fileID: 0}
+  highIntensityParticles: {fileID: 3811850846063924313}
+  lowIntensityParticles: {fileID: 3069368769724039039}
   inputIndex: 0
   playerColor: {r: 0, g: 0, b: 0, a: 0}
   playerHeight: 2.2
@@ -322,6 +322,11 @@ PrefabInstance:
       propertyPath: InitialModule.startSizeZ.minMaxState
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3069368769083824508, guid: 3f9ef56922ab1984eaefb54403ff4e1b,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3069368770339580479, guid: 3f9ef56922ab1984eaefb54403ff4e1b,
         type: 3}
       propertyPath: ShapeModule.angle
@@ -367,11 +372,27 @@ PrefabInstance:
       propertyPath: CollisionModule.collisionMessages
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3069368770339580479, guid: 3f9ef56922ab1984eaefb54403ff4e1b,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3069368770673692110, guid: 3f9ef56922ab1984eaefb54403ff4e1b,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f9ef56922ab1984eaefb54403ff4e1b, type: 3}
 --- !u!4 &3069368769724039038 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3069368770673692111, guid: 3f9ef56922ab1984eaefb54403ff4e1b,
+    type: 3}
+  m_PrefabInstance: {fileID: 951775921}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3069368769724039039 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3069368770673692110, guid: 3f9ef56922ab1984eaefb54403ff4e1b,
     type: 3}
   m_PrefabInstance: {fileID: 951775921}
   m_PrefabAsset: {fileID: 0}
@@ -454,16 +475,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3069368770673692110, guid: 3f9ef56922ab1984eaefb54403ff4e1b,
-        type: 3}
-      propertyPath: CollisionModule.type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3069368770673692110, guid: 3f9ef56922ab1984eaefb54403ff4e1b,
-        type: 3}
-      propertyPath: CollisionModule.collisionMessages
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3069368769083824508, guid: 3f9ef56922ab1984eaefb54403ff4e1b,
         type: 3}
       propertyPath: InitialModule.startSize.minMaxState
@@ -478,6 +489,11 @@ PrefabInstance:
         type: 3}
       propertyPath: InitialModule.startSizeZ.minMaxState
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3069368769083824508, guid: 3f9ef56922ab1984eaefb54403ff4e1b,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3069368770339580479, guid: 3f9ef56922ab1984eaefb54403ff4e1b,
         type: 3}
@@ -529,11 +545,37 @@ PrefabInstance:
       propertyPath: CollisionModule.collisionMessages
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3069368770339580479, guid: 3f9ef56922ab1984eaefb54403ff4e1b,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3069368770673692110, guid: 3f9ef56922ab1984eaefb54403ff4e1b,
+        type: 3}
+      propertyPath: CollisionModule.type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3069368770673692110, guid: 3f9ef56922ab1984eaefb54403ff4e1b,
+        type: 3}
+      propertyPath: CollisionModule.collisionMessages
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3069368770673692110, guid: 3f9ef56922ab1984eaefb54403ff4e1b,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3f9ef56922ab1984eaefb54403ff4e1b, type: 3}
 --- !u!4 &3811850846063924312 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3069368770673692111, guid: 3f9ef56922ab1984eaefb54403ff4e1b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2197471314162702743}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3811850846063924313 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3069368770673692110, guid: 3f9ef56922ab1984eaefb54403ff4e1b,
     type: 3}
   m_PrefabInstance: {fileID: 2197471314162702743}
   m_PrefabAsset: {fileID: 0}
@@ -556,11 +598,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8061476557546403289}
     m_Modifications:
-    - target: {fileID: 4853448993467948770, guid: 5f853fa7a0ca7fb4aa1514cb8c1af3dc,
-        type: 3}
-      propertyPath: m_Name
-      value: Corps
-      objectReference: {fileID: 0}
     - target: {fileID: 7582975583157018621, guid: 5f853fa7a0ca7fb4aa1514cb8c1af3dc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -615,6 +652,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8864224051723223776, guid: 5f853fa7a0ca7fb4aa1514cb8c1af3dc,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4853448993467948770, guid: 5f853fa7a0ca7fb4aa1514cb8c1af3dc,
+        type: 3}
+      propertyPath: m_Name
+      value: Corps
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5f853fa7a0ca7fb4aa1514cb8c1af3dc, type: 3}

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41dd9004d2b06cb4e9a3d170abcd5394, type: 3}
+  m_Name: DoorLeft
+  m_EditorClassIdentifier: 
+  ID: 103
+  visuals: {fileID: 3548542827746684902, guid: 9e4eb30992d8817449e8e2076602862c, type: 3}
+  inflammable: 0
+  sprite: {fileID: 21300000, guid: 0e143c817a73ad741a08202d9643a3a1, type: 3}

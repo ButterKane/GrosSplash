@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41dd9004d2b06cb4e9a3d170abcd5394, type: 3}
-  m_Name: Door
+  m_Script: {fileID: 11500000, guid: b3bba4c50dd53c24ebc777428d58c8c6, type: 3}
+  m_Name: Bench
   m_EditorClassIdentifier: 
-  ID: 103
-  visuals: {fileID: 3975496395257471188, guid: 912879a894662b048935456500f3e2e2, type: 3}
+  ID: 209
+  visuals: {fileID: 6590012841654489572, guid: a695482466e8eba4cb1cefc9493921cc, type: 3}
+  sprite: {fileID: 21300000, guid: 47807d9e5bf911845be5cdfa16df88ac, type: 3}
   inflammable: 0
-  sprite: {fileID: 21300000, guid: a829eaa3c652a444d8e4663d75082034, type: 3}

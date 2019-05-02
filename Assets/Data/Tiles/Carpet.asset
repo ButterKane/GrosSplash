@@ -15,5 +15,9 @@ MonoBehaviour:
   ID: 1
   sprite: {fileID: 21300000, guid: ae02be46657ccdd4095945caef5d3008, type: 3}
   visuals: {fileID: 7462817644742794312, guid: 1ca9e49c5924aed4b8091dfc4dedf8b8, type: 3}
-  inflammable: 0
+  inflammable: 1
   hasCollisions: 1
+  fireStrengthToBeSetOnFire: 20
+  maxFireValue: 100
+  minFireValue: -40
+  fireIncrementationPerSecond: 3

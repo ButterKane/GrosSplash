@@ -17,3 +17,7 @@ MonoBehaviour:
   visuals: {fileID: 2350080007365819866, guid: 85e557db0a2bfb743bb696ce9ff8ec80, type: 3}
   inflammable: 0
   hasCollisions: 1
+  fireStrengthToBeSetOnFire: 80
+  maxFireValue: 100
+  minFireValue: -10
+  fireIncrementationPerSecond: 1

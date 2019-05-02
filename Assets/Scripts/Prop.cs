@@ -10,9 +10,12 @@ public class Prop : MonoBehaviour
     private GameObject scaleGuizmos;
     private GameObject rotationGuizmos;
 
+    GridManager gridManager;
+
     private void Awake()
     {
-        GenerateGuizmos();
+        gridManager = FindObjectOfType<GridManager>();
+        //GenerateGuizmos();
     }
     public void GenerateGuizmos()
     {
@@ -156,6 +159,6 @@ public class Prop : MonoBehaviour
         }
 
         //Change the layer
-        LevelEditor.i.globalFunctions.ChangeLayerRecursively(this.transform, "Prop");
+        gridManager.globalFunctions.ChangeLayerRecursively(this.transform, "Prop");
     }
 }

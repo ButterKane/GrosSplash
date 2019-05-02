@@ -60,11 +60,11 @@ public class ToolSelector : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            SelectToolByID(3);
+          //  SelectToolByID(3);
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            SelectToolByID(4);
+        //    SelectToolByID(4);
         }
     }
 }

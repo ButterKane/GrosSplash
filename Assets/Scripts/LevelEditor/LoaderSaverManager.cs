@@ -32,6 +32,12 @@ public class LoaderSaverManager : MonoBehaviour // the Class
     public InputField saveNameInputField;
     public InputField loadNameInputField;
 
+    [HideInInspector] GridManager gridManager;
+    private void Awake()
+    {
+        gridManager = FindObjectOfType<GridManager>();
+    }
+
     string path = Application.streamingAssetsPath + "/Levels/";
 
     public void SaveLevel()
@@ -40,10 +46,10 @@ public class LoaderSaverManager : MonoBehaviour // the Class
         var save = new Save()
         {
             tileSize = int.Parse(LevelEditor.i.tileSizeInput.text),
-            tileGrid = LevelEditor.i.ConvertTileGridToID(LevelEditor.i.tileGrid),
-            wallGrid = LevelEditor.i.ConvertWallGridToID(LevelEditor.i.wallGrid),
-            tileRotation = LevelEditor.i.GetTileRotation(LevelEditor.i.tileGrid),
-            wallRotation = LevelEditor.i.GetWallRotation(LevelEditor.i.wallGrid),
+            tileGrid = LevelEditor.i.ConvertTileGridToID(gridManager.tileGrid),
+            wallGrid = LevelEditor.i.ConvertWallGridToID(gridManager.wallGrid),
+            tileRotation = LevelEditor.i.GetTileRotation(gridManager.tileGrid),
+            wallRotation = LevelEditor.i.GetWallRotation(gridManager.wallGrid),
             propList = LevelEditor.i.GetPropList()
         };
 
@@ -57,7 +63,7 @@ public class LoaderSaverManager : MonoBehaviour // the Class
 
     public void LoadLevel()
     {
-        LevelEditor.i.GenerateGridUsingSave(GetLevel());
+        gridManager.GenerateGridUsingSave(GetLevel());
     }
 
     public Save GetLevel()

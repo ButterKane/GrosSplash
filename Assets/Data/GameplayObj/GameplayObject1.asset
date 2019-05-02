@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cf7e85c69828e143b9d4693b251bfc7, type: 3}
   m_Name: GameplayObject1
   m_EditorClassIdentifier: 
-  ID: 0
-  sprite: {fileID: 0}
+  ID: 300
+  sprite: {fileID: 21300000, guid: 24325243e0a33e444a46290946bb538c, type: 3}
   visuals: {fileID: 0}

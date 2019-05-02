@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41dd9004d2b06cb4e9a3d170abcd5394, type: 3}
-  m_Name: DebugWall
+  m_Name: Wall
   m_EditorClassIdentifier: 
   ID: 100
-  visuals: {fileID: -927199367670048503, guid: 723b8e24919c9bb4b8b8fc44930be520, type: 3}
+  visuals: {fileID: 3603026181324433130, guid: c53b010f6852fcc4585bda2ba6d75c11, type: 3}
   inflammable: 0
-  sprite: {fileID: 21300000, guid: f9b30c6e500868346badd88e9dcd3ccc, type: 3}
+  sprite: {fileID: 21300000, guid: bfe05886d337bfe429d35c551d8de66e, type: 3}

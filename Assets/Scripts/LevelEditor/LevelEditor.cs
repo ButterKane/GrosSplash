@@ -101,6 +101,7 @@ public class LevelEditor : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 BuildOverHoveredTile();
+                Debug.Log("Building over tile");
             }
             if (Input.GetMouseButton(1) && hoveredWall != null)
             {
@@ -122,18 +123,14 @@ public class LevelEditor : MonoBehaviour
 
     private void RotateHoveredObject()
     {
-        if (hoveredTile != null)
+        switch (selectedTool.toolName)
         {
-            switch (selectedTool.toolName)
-            {
-                case "TILE":
-                    hoveredTile.Rotate();
-                    break;
-                case "WALL":
-                    Vector2Int coordinates = hoveredTile.coordinates;
-                    wallGrid[coordinates.x, coordinates.y].Rotate();
-                    break;
-            }
+            case "TILE":
+                hoveredTile.Rotate();
+                break;
+            case "WALL":
+                hoveredWall.Rotate();
+                break;
         }
     }
 
@@ -273,7 +270,7 @@ public class LevelEditor : MonoBehaviour
                 //Apply rotation to the tile
                 tileGrid[x, y].rotationAmount = save.tileRotation[x][y];
                 tileGrid[x, y].UpdateRotation();
-                if (save.wallGrid[x][y] >= 0)
+                if (save.wallGrid[x][y] > 0)
                 {
                     //Generates the walls
                     BuildWall(library.GetWallDataFromID(save.wallGrid[x][y]), new Vector2Int(x, y));
@@ -303,6 +300,10 @@ public class LevelEditor : MonoBehaviour
 
     private void GenerateGrid(Vector2Int gridSize, float tileSize)
     {
+        foreach (Prop prop in propList)
+        {
+            Destroy(prop.gameObject);
+        }
         propList.Clear();
         tileGrid = new Tile[gridSize.x, gridSize.y];
         wallGrid = new Wall[gridSize.x, gridSize.y];

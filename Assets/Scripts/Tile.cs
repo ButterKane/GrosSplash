@@ -34,7 +34,6 @@ public class Tile : MonoBehaviour
             newVisual.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             newVisual.name = "visuals";
         }
-        GetComponent<SpriteRenderer>().sprite = tileData.sprite;
         if (!tileData.hasCollisions)
         {
             GetComponent<BoxCollider>().enabled = false;

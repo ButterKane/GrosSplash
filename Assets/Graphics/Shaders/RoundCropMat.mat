@@ -4,8 +4,9 @@
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: RoundCropMat
   m_Shader: {fileID: 4800000, guid: 2beaa6d1099a1934bb8291397972d966, type: 3}
   m_ShaderKeywords: 
@@ -18,6 +19,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _QuadTexture:
+        m_Texture: {fileID: 2800000, guid: f99363996bd95ce4ca3d83b488eda8ef, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _node_7930:
         m_Texture: {fileID: 2800000, guid: f99363996bd95ce4ca3d83b488eda8ef, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -25,4 +30,5 @@ Material:
     m_Floats:
     - _Cutoff: 0.5
     - _LerpValue: 0
-    m_Colors: []
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}

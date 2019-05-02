@@ -66,6 +66,23 @@ public class LoaderSaverManager : MonoBehaviour // the Class
         gridManager.GenerateGridUsingSave(GetLevel());
     }
 
+    public void LoadLevel(string levelName)
+    {
+        gridManager.GenerateGridUsingSave(GetLevelFromString(levelName));
+    }
+
+    public Save GetLevelFromString(string levelName)
+    {
+        string fileName = path + levelName + ".xml";
+        XmlSerializer serializer = new XmlSerializer(typeof(Save));
+
+        using (FileStream stream = new FileStream(fileName, FileMode.Open))
+        {
+            Save loadedSave = (Save)serializer.Deserialize(stream);
+            return loadedSave;
+        }
+    }
+
     public Save GetLevel()
     {
         string fileName = path + loadNameInputField.text + ".xml";

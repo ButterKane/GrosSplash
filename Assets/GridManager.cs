@@ -17,6 +17,7 @@ public class GridManager : MonoBehaviour
         library = FindObjectOfType<Library>();
         globalFunctions = FindObjectOfType<GlobalFunctions>();
     }
+
     public void GenerateGridUsingSave(Save save)
     {
         propList.Clear();

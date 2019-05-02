@@ -9,4 +9,5 @@ public class WallData : ScriptableObject
     public GameObject visuals;
     public bool inflammable = false;
     public Sprite sprite;
+    public int fireIsolation = 30; //How much fire is isolated (between 0 and 100, 100 means no fire can go through that wall)
 }

@@ -10,4 +10,8 @@ public class TileData : ScriptableObject
     public GameObject visuals;
     public bool inflammable = false;
     public bool hasCollisions = true;
+    public int fireStrengthToBeSetOnFire = 50;
+    public int maxFireValue = 100;
+    public int minFireValue = -20;
+    public float fireIncrementationPerSecond = 1;
 }

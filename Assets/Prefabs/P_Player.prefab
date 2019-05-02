@@ -33741,7 +33741,7 @@ GameObject:
   - component: {fileID: 8061476558589672415}
   m_Layer: 0
   m_Name: P_Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33791,7 +33791,6 @@ MonoBehaviour:
   self: {fileID: 8061476558589672409}
   body: {fileID: 8061476558589672415}
   deadzone: 0.2
-  playerAnim: {fileID: 1505349034978992986}
   cam: {fileID: 0}
   highIntensityParticles: {fileID: 8009779572455117967}
   lowIntensityParticles: {fileID: 3164988292695713019}

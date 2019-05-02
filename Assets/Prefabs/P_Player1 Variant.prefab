@@ -30,6 +30,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: P_Player1 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8061476558589672420, guid: 218a241db58f56849816014d9aa8d204,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054686301061852724, guid: 218a241db58f56849816014d9aa8d204,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054686301061852729, guid: 218a241db58f56849816014d9aa8d204,
+        type: 3}
+      propertyPath: CollisionModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054686301061852729, guid: 218a241db58f56849816014d9aa8d204,
+        type: 3}
+      propertyPath: CollisionModule.type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2054686301061852729, guid: 218a241db58f56849816014d9aa8d204,
+        type: 3}
+      propertyPath: CollisionModule.collisionMessages
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8061476558589672409, guid: 218a241db58f56849816014d9aa8d204,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -139,26 +164,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: a58592255b6b54641ab281aa3c406b25, type: 2}
-    - target: {fileID: 2054686301061852724, guid: 218a241db58f56849816014d9aa8d204,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2054686301061852729, guid: 218a241db58f56849816014d9aa8d204,
-        type: 3}
-      propertyPath: CollisionModule.enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2054686301061852729, guid: 218a241db58f56849816014d9aa8d204,
-        type: 3}
-      propertyPath: CollisionModule.type
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2054686301061852729, guid: 218a241db58f56849816014d9aa8d204,
-        type: 3}
-      propertyPath: CollisionModule.collisionMessages
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1505349034978992986, guid: 218a241db58f56849816014d9aa8d204, type: 3}

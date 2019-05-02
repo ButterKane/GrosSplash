@@ -9,35 +9,21 @@ public class ToolSelector : MonoBehaviour
 
     public void SelectToolByID(int toolID)
     {
+        LevelEditor.i.UpdateAllGuizmos();
         foreach (EditorTool tool in toolList)
         {
-            tool.linkedPanel.gameObject.SetActive(false);
-        }
-        LevelEditor.i.selectedTool = toolList[toolID];
-        toolList[toolID].linkedPanel.gameObject.SetActive(true);
-        toolHighlighter.transform.position = toolList[toolID].transform.position;
-        LevelEditor.i.library.UpdateSelectedObject();
-    }
-
-    public void SelectToolByName(string toolName)
-    {
-        bool toolFound = false;
-        foreach (EditorTool tool in toolList)
-        {
-            tool.linkedPanel.gameObject.SetActive(false);
-            if (tool.toolName == toolName)
+            if (tool.linkedPanel != null)
             {
-                LevelEditor.i.selectedTool = tool;
-                toolHighlighter.transform.position = tool.transform.position;
-                LevelEditor.i.library.UpdateSelectedObject();
-                toolFound = true;
-                tool.linkedPanel.gameObject.SetActive(true);
+                tool.linkedPanel.gameObject.SetActive(false);
             }
         }
-        if (!toolFound)
+        LevelEditor.i.selectedTool = toolList[toolID];
+        if (toolList[toolID].linkedPanel != null)
         {
-            Debug.LogWarning("Couldn't find the tool named " + toolName);
+            toolList[toolID].linkedPanel.gameObject.SetActive(true);
         }
+        toolHighlighter.transform.position = toolList[toolID].transform.position;
+        LevelEditor.i.library.UpdateSelectedObject();
     }
 
     public EditorTool GetToolByName(string name)
@@ -75,6 +61,10 @@ public class ToolSelector : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             SelectToolByID(3);
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            SelectToolByID(4);
         }
     }
 }

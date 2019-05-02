@@ -9,6 +9,7 @@ public class GlobalFunctions : MonoBehaviour
 {
     public void ChangeLayerRecursively(Transform obj, string layerName)
     {
+        if (obj.gameObject.layer != LayerMask.NameToLayer("Default")) { return; }
         obj.gameObject.layer = LayerMask.NameToLayer(layerName);
         foreach (Transform t in obj)
         {

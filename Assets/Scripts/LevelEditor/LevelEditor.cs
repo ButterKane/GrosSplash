@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum TransformEditionTool { Translate, Rotate, Scale}
 public class LevelEditor : MonoBehaviour
 {
     public static LevelEditor i;
@@ -24,7 +25,9 @@ public class LevelEditor : MonoBehaviour
     public Tile hoveredTile;
     public Prop hoveredProp;
     public Wall hoveredWall;
+    public Transform selectedGuizmo;
 
+    public TransformEditionTool selectedTransformTool;
     public EditorTool selectedTool;
 
     public TileData selectedTileData;
@@ -46,6 +49,7 @@ public class LevelEditor : MonoBehaviour
         loaderSaverManager = FindObjectOfType<LoaderSaverManager>();
         toolSelector = FindObjectOfType<ToolSelector>();
         globalFunctions = FindObjectOfType<GlobalFunctions>();
+        selectedTransformTool = TransformEditionTool.Translate;
     }
 
     private void Update()
@@ -78,11 +82,44 @@ public class LevelEditor : MonoBehaviour
         {
             UnselectWall();
         }
+        layerMask = LayerMask.GetMask("Guizmo");
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, layerMask))
+        {
+            SelectHoveredGuizmo (hit);
+        }
+        else
+        {
+            UnselectGuizmo();
+        }
         //Input actions
         if (selectedTool == null) { return; }
-        if (Input.GetKeyDown(KeyCode.R))
+        //Choose the transform tool
+        if (selectedTool.toolName == "TRANSFORM")
         {
-            RotateHoveredObject();
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                selectedTransformTool = TransformEditionTool.Translate;
+                UpdateAllGuizmos();
+            }
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                selectedTransformTool = TransformEditionTool.Scale;
+                UpdateAllGuizmos();
+            }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                selectedTransformTool = TransformEditionTool.Rotate;
+                UpdateAllGuizmos();
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                RotateHoveredObject();
+            }
         }
         if (Cursor.lockState != CursorLockMode.Locked) { return; }
         if (selectedTool.toolName == "TILE")
@@ -148,6 +185,27 @@ public class LevelEditor : MonoBehaviour
         {
             Vector2Int coordinates = hoveredTile.coordinates;
             BuildWall(selectedWallData, coordinates);
+        }
+    }
+
+    public void UpdateAllGuizmos()
+    {
+        foreach (Prop prop in propList)
+        {
+            prop.ShowGuizmos();
+        }
+    }
+
+    private void SelectHoveredGuizmo(RaycastHit hit)
+    {
+        selectedGuizmo = hit.transform;
+    }
+
+    private void UnselectGuizmo()
+    {
+        if (!Input.GetMouseButton(0))
+        {
+            selectedGuizmo = null;
         }
     }
 

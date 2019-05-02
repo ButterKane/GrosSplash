@@ -10,6 +10,15 @@ public class Library : MonoBehaviour
     public GameObject panelObjPrefab;
     public TileData defaultTile;
 
+    [Header("Guizmos")]
+    public GameObject translateGuizmoPrefab;
+    public GameObject scaleGuizmoPrefab;
+    public GameObject rotateGuizmoPrefab;
+
+    public Material xGuizmoMaterial;
+    public Material yGuizmoMaterial;
+    public Material zGuizmoMaterial;
+
 
 
     public List<TileData> tileList;
@@ -64,13 +73,16 @@ public class Library : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetAxisRaw("Mouse ScrollWheel") < 0)
+        if (LevelEditor.i.selectedTool.objectList != null)
         {
-            ScrollPanelUp(LevelEditor.i.selectedTool.objectList.transform);
-        }
-        else if (Input.GetAxisRaw("Mouse ScrollWheel") > 0)
-        {
-            ScrollPanelDown(LevelEditor.i.selectedTool.objectList.transform);
+            if (Input.GetAxisRaw("Mouse ScrollWheel") < 0)
+            {
+                ScrollPanelUp(LevelEditor.i.selectedTool.objectList.transform);
+            }
+            else if (Input.GetAxisRaw("Mouse ScrollWheel") > 0)
+            {
+                ScrollPanelDown(LevelEditor.i.selectedTool.objectList.transform);
+            }
         }
     }
 

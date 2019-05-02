@@ -46,7 +46,6 @@ public class WaterPush : MonoBehaviour
             if (other.GetComponent<Rigidbody>() && other.tag == "Movable")
             {
                 other.GetComponent<Rigidbody>().AddForce(impactDirection * pushForce, ForceMode.Impulse);
-
             }
 
             if (other.tag == "Waterizable" || other.tag == "Movable")

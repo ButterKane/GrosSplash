@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager i;
     [HideInInspector] public GridManager gridManager;
     [HideInInspector] public FireManager fireManager;
+    [HideInInspector] public Library library;
     [HideInInspector] LoaderSaverManager loadSaverManager;
 
     public GameObject player1Prefab;
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         i = this;
+        library = FindObjectOfType<Library>();
         gridManager = FindObjectOfType<GridManager>();
         fireManager = FindObjectOfType<FireManager>();
         loadSaverManager = FindObjectOfType<LoaderSaverManager>();

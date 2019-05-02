@@ -19,6 +19,9 @@ public class Library : MonoBehaviour
     public Material yGuizmoMaterial;
     public Material zGuizmoMaterial;
 
+    public GameObject fireFX;
+    public GameObject extinguishFX;
+
 
 
     public List<TileData> tileList;

@@ -30,6 +30,12 @@ public class PlayerMovement : MonoBehaviour
     public int MaxHP;
 
     [Space(2)]
+    [Header("Multi settings")]
+    public int playerIndex;
+    public string axisMoveHorizontal, axisMoveVertical, axisAimHorizontal, axisAimVertical;
+    public KeyCode weaponKey;
+
+    [Space(2)]
     [Header("Movement settings")]
     public MoveState moveState;
     public AnimationCurve accelerationCurve;
@@ -80,6 +86,13 @@ public class PlayerMovement : MonoBehaviour
         actualParticleSystem = lowIntensityParticles;
     }
 
+    private void Start()
+    {
+        highIntensityParticles.Stop();
+        lowIntensityParticles.Stop();
+
+    }
+
     void Update()
     {
         GetInput();
@@ -124,22 +137,20 @@ public class PlayerMovement : MonoBehaviour
     {
         //Vector3 _inputX = Input.GetAxisRaw("Horizontal_" + inputIndex.ToString()) * cam.transform.right;
         //Vector3 _inputZ = Input.GetAxisRaw("Vertical_" + inputIndex.ToString()) * cam.transform.forward;
-        Vector3 _inputX = Input.GetAxisRaw("LStickX") * cam.transform.right;
-        Vector3 _inputZ = Input.GetAxisRaw("LStickY") * cam.transform.forward;
+        Vector3 _inputX = Input.GetAxisRaw(axisMoveHorizontal + playerIndex) * cam.transform.right;
+        Vector3 _inputZ = Input.GetAxisRaw(axisMoveVertical + playerIndex) * cam.transform.forward;
         input = _inputX - _inputZ;
         input.y = 0;
         input = input.normalized * ((input.magnitude - deadzone) / (1 - deadzone));
         Debug.DrawLine(transform.position, transform.position + input * 10);
 
-        Vector3 _aimX = Input.GetAxisRaw("RStickX") * cam.transform.right;
-        Vector3 _aimZ = Input.GetAxisRaw("RStickY") * cam.transform.forward;
+        Vector3 _aimX = Input.GetAxisRaw(axisAimHorizontal + playerIndex) * cam.transform.right;
+        Vector3 _aimZ = Input.GetAxisRaw(axisAimVertical + playerIndex) * cam.transform.forward;
         aim = _aimX + _aimZ;
         aim.y = 0;
         aim = aim.normalized;
 
-        rTrigger = Input.GetAxis("RTrigger");
-
-        if (Input.GetButtonDown("SwitchWeapon"))
+        if (Input.GetKey(weaponKey))
         {
             StartCoroutine(SwitchWeapon());
         }

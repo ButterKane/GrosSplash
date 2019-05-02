@@ -26,13 +26,18 @@ public class Library : MonoBehaviour
     public List<GameplayObjData> gameplayObjList;
     public List<PropData> propList;
 
+    public bool isEditor;
+
 
     private void Awake()
     {
-        GenerateTileListPanel();
-        GenerateWallListPanel();
-        GenerateGameplayObjListPanel();
-        GeneratePropListPanel();
+        if (isEditor)
+        {
+            GenerateTileListPanel();
+            GenerateWallListPanel();
+            GenerateGameplayObjListPanel();
+          //  GeneratePropListPanel();
+        }
     }
 
     public TileData GetTileDataFromID(int ID)
@@ -73,21 +78,25 @@ public class Library : MonoBehaviour
 
     private void Update()
     {
-        if (LevelEditor.i.selectedTool.objectList != null)
+        if (isEditor)
         {
-            if (Input.GetAxisRaw("Mouse ScrollWheel") < 0)
+            if (LevelEditor.i.selectedTool.objectList != null)
             {
-                ScrollPanelUp(LevelEditor.i.selectedTool.objectList.transform);
-            }
-            else if (Input.GetAxisRaw("Mouse ScrollWheel") > 0)
-            {
-                ScrollPanelDown(LevelEditor.i.selectedTool.objectList.transform);
+                if (Input.GetAxisRaw("Mouse ScrollWheel") < 0)
+                {
+                    ScrollPanelUp(LevelEditor.i.selectedTool.objectList.transform);
+                }
+                else if (Input.GetAxisRaw("Mouse ScrollWheel") > 0)
+                {
+                    ScrollPanelDown(LevelEditor.i.selectedTool.objectList.transform);
+                }
             }
         }
     }
 
     public void GenerateTileListPanel()
     {
+        Debug.Log(LevelEditor.i.toolSelector);
         Transform panelParent = LevelEditor.i.toolSelector.GetToolByName("TILE").objectList;
         for (int i = 0; i < tileList.Count; i++)
         {

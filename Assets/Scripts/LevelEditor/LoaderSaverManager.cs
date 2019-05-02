@@ -13,6 +13,18 @@ public struct Save
 {
     public float tileSize;
     public int[][] tileGrid;
+    public int[][] wallGrid;
+    public int[][] tileRotation;
+    public int[][] wallRotation;
+    public PropInformations[] propList;
+}
+
+public struct PropInformations
+{
+    public int propID;
+    public string propPosition;
+    public Quaternion propRotation;
+    public string propScale;
 }
 
 public class LoaderSaverManager : MonoBehaviour // the Class
@@ -28,7 +40,11 @@ public class LoaderSaverManager : MonoBehaviour // the Class
         var save = new Save()
         {
             tileSize = int.Parse(LevelEditor.i.tileSizeInput.text),
-            tileGrid = LevelEditor.i.ConvertTileGridToID(LevelEditor.i.tileGrid)
+            tileGrid = LevelEditor.i.ConvertTileGridToID(LevelEditor.i.tileGrid),
+            wallGrid = LevelEditor.i.ConvertWallGridToID(LevelEditor.i.wallGrid),
+            tileRotation = LevelEditor.i.GetTileRotation(LevelEditor.i.tileGrid),
+            wallRotation = LevelEditor.i.GetWallRotation(LevelEditor.i.wallGrid),
+            propList = LevelEditor.i.GetPropList()
         };
 
         XmlSerializer serializer = new XmlSerializer(typeof(Save));

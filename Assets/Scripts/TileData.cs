@@ -7,6 +7,7 @@ public class TileData : ScriptableObject
 {
     public int ID;
     public Sprite sprite;
+    public GameObject visuals;
     public bool inflammable = false;
-    public bool canStepOnIt = true;
+    public bool hasCollisions = true;
 }

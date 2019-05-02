@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform self;
     public Rigidbody body;
     public float deadzone = 0.2f;
-    public Animator playerAnim;
+    //public Animator playerAnim;
     public Camera cam;
     public ParticleSystem highIntensityParticles;
     public ParticleSystem lowIntensityParticles;
@@ -84,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
         currentHP = MaxHP;
         maxSpeed = maxSpeedIdle;
         actualParticleSystem = lowIntensityParticles;
+        cam = Camera.main;
     }
 
     private void Start()
@@ -202,7 +203,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateAnimatorBlendTree()
     {
-        playerAnim.SetFloat("IdleRunningBlend", speed / maxSpeed);
+     //   playerAnim.SetFloat("IdleRunningBlend", speed / maxSpeed);
     }
 
     void Rotate() //Rotate according to Aim Input
@@ -264,21 +265,21 @@ public class PlayerMovement : MonoBehaviour
                 actualParticleSystem.Play();
                 maxSpeed = maxSpeedShooting;
                 shooting = true;
-                playerAnim.SetBool("Shooting", true);
+                //playerAnim.SetBool("Shooting", true);
             }
             else
             {
                 actualParticleSystem.Stop();
                 maxSpeed = maxSpeedIdle;
                 shooting = false;
-                playerAnim.SetBool("Shooting", false);
+                //playerAnim.SetBool("Shooting", false);
             }
         }
         else
         {
             actualParticleSystem.Stop();
             shooting = false;
-            playerAnim.SetBool("Shooting", false);
+            //playerAnim.SetBool("Shooting", false);
         }
     }
 

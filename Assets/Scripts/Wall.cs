@@ -7,7 +7,12 @@ public class Wall : MonoBehaviour
     public WallData wallData;
     public Vector2Int coordinates;
     public int rotationAmount; //Between 1 and 4
+    private GlobalFunctions globalFunctions;
 
+    private void Awake()
+    {
+        globalFunctions = FindObjectOfType<GlobalFunctions>();
+    }
     public void ChangeWallData(WallData newWallData)
     {
         wallData = newWallData;
@@ -37,8 +42,7 @@ public class Wall : MonoBehaviour
         }
 
         //Change the layer
-        Debug.Log("Changing the layer");
-        LevelEditor.i.globalFunctions.ChangeLayerRecursively(this.transform, "Wall");
+        globalFunctions.ChangeLayerRecursively(this.transform, "Wall");
 
         UpdateRotation();
     }

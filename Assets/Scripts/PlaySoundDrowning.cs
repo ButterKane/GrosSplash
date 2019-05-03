@@ -24,7 +24,6 @@ public class PlaySoundDrowning : MonoBehaviour
         soundSource.clip = soundsLibrary[Random.Range(0, soundsLibrary.Length)];
         if (!soundSource.isPlaying)
         {
-            print("drowning");
             soundSource.Play();
         }
     }

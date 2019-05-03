@@ -14,6 +14,7 @@ public class Tile : MonoBehaviour
     {
         fireValue = 0;
         InvokeRepeating("UpdateFire", 0f, 1f);
+        actualFire = null;
     }
 
     public void UpdateFireScale()
@@ -52,12 +53,13 @@ public class Tile : MonoBehaviour
     //Generates the fire on this tile
     public void Ignite()
     {
-        if (fireValue > 0) { return; }
+        if (actualFire != null) { return; }
         if (!GetTileData().inflammable) { return; }
         fireValue++;
         //Generates firevisuals
         if (actualFire == null)
         {
+            Debug.Log("igniting");
             actualFire = Instantiate(GameManager.i.library.fireFX, this.transform, true);
             actualFire.transform.localPosition = Vector3.zero;
             UpdateFire();

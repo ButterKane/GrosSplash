@@ -31,20 +31,20 @@ public class Enemy : MonoBehaviour
         actualAttackCD = 0;
         actualHealth = maxHealth;
         isFree = true;
+        navMesh.enabled = false;
+        StartCoroutine(EnableNavMeshAgent(1f));
     }
 
     private void Update()
     {
-        if (isFree)
+        if (isFree && navMesh.enabled)
         {
             if (navMesh.destination != transform.position)
             {
-                print("running");
                 animator.SetBool("Running", true);
             }
             else
             {
-                print(" pas running");
                 animator.SetBool("Running", false);
             }
 
@@ -65,7 +65,6 @@ public class Enemy : MonoBehaviour
                 navMesh.CalculatePath(focusedTile.transform.position, path);
                 if (path.status == NavMeshPathStatus.PathPartial || path.status == NavMeshPathStatus.PathInvalid)
                 {
-                    Debug.Log("Can't reach destination");
                     focusedTile = null;
                 }
             }
@@ -125,9 +124,19 @@ public class Enemy : MonoBehaviour
         isFree = true;
     }
 
+    public IEnumerator EnableNavMeshAgent(float time)
+    {
+        yield return new WaitForSeconds(time);
+        navMesh.enabled = true;
+    }
+
      public void TakeDamage(float damage)
     {
         actualHealth -= damage;
+        if (actualHealth <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
     public void HitAnimationLaunch()
     {

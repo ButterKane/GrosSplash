@@ -30,6 +30,7 @@ public class Enemy : MonoBehaviour
     {
         actualAttackCD = 0;
         actualHealth = maxHealth;
+        isFree = true;
     }
 
     private void Update()

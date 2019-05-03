@@ -99,6 +99,7 @@ public class GridManager : MonoBehaviour
                 generatedTileScript.coordinates = new Vector2Int(x, y);
                 generatedTileScript.ChangeTileData(library.defaultTile);
                 newEmptyCell.transform.position = newCellPosition;
+                newEmptyCell.name = "Cell[" + x + "," + y + "]";
                 tileGrid[x, y] = generatedTileScript;
                 yPosition++;
             }

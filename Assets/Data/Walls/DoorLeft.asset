@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: DoorLeft
   m_EditorClassIdentifier: 
   ID: 103
-  visuals: {fileID: 3548542827746684902, guid: 9e4eb30992d8817449e8e2076602862c, type: 3}
+  visuals: {fileID: 2276857771551269089, guid: 9e4eb30992d8817449e8e2076602862c, type: 3}
   inflammable: 0
   sprite: {fileID: 21300000, guid: 0e143c817a73ad741a08202d9643a3a1, type: 3}
+  fireIsolation: 30

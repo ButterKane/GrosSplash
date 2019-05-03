@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Pillar
   m_EditorClassIdentifier: 
   ID: 105
-  visuals: {fileID: 1893504279667979997, guid: 2eb1f6bba7ba65942b769726353c5dbc, type: 3}
+  visuals: {fileID: 9187480791248076384, guid: 2eb1f6bba7ba65942b769726353c5dbc, type: 3}
   inflammable: 0
   sprite: {fileID: 21300000, guid: 6ea2eb7b573f8494295c1ee97ea7e12d, type: 3}
+  fireIsolation: 30

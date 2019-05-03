@@ -289,16 +289,24 @@ public class PlayerMovement : MonoBehaviour
             for (int i = 0; i < hits.Length; i++)
             {
                 RaycastHit hit = hits[i];
+                Tile potentialTile;
                 if (hit.transform.gameObject.GetComponentInChildren<Wall>() != null)
                 {
+                    potentialTile = hit.transform.GetComponent<Tile>();
+
+                    if (potentialTile)
+                    {
+                        potentialTile.fireValue -= lowIntensityWaterForce;
+                        potentialTile.UpdateFireScale();
+                    }
                     return;
                 }
-                Tile tile = hit.transform.GetComponent<Tile>();
+                potentialTile = hit.transform.GetComponent<Tile>();
 
-                if (tile)
+                if (potentialTile)
                 {
-                    tile.fireValue -= highIntensityWaterForce;
-                    tile.UpdateFireScale();
+                    potentialTile.fireValue -= highIntensityWaterForce;
+                    potentialTile.UpdateFireScale();
                 }
             }
         }
@@ -313,16 +321,24 @@ public class PlayerMovement : MonoBehaviour
                 for (int x = 0; x < hits.Length; x++)
                 {
                     RaycastHit hit = hits[x];
+                    Tile potentialTile;
                     if (hit.transform.gameObject.GetComponentInChildren<Wall>() != null)
                     {
+                        potentialTile = hit.transform.GetComponent<Tile>();
+
+                        if (potentialTile)
+                        {
+                            potentialTile.fireValue -= lowIntensityWaterForce;
+                            potentialTile.UpdateFireScale();
+                        }
                         return;
                     }
-                    Tile tile = hit.transform.GetComponent<Tile>();
+                    potentialTile = hit.transform.GetComponent<Tile>();
 
-                    if (tile)
+                    if (potentialTile)
                     {
-                        tile.fireValue -= lowIntensityWaterForce;
-                        tile.UpdateFireScale();
+                        potentialTile.fireValue -= lowIntensityWaterForce;
+                        potentialTile.UpdateFireScale();
                     }
                 }
             }

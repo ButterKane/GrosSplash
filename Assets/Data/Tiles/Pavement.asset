@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 3
   sprite: {fileID: 21300000, guid: 044c498823e7399468bebc9f679d40ec, type: 3}
-  visuals: {fileID: 5912369867621323229, guid: f66a1215acd7fa742a70a50ce6b2261c, type: 3}
+  visuals: {fileID: 4357937499182276996, guid: f66a1215acd7fa742a70a50ce6b2261c, type: 3}
   inflammable: 1
   hasCollisions: 1
-  fireStrengthToBeSetOnFire: 20
+  fireStrengthToBeSetOnFire: 80
   maxFireValue: 100
   minFireValue: -10
-  fireIncrementationPerSecond: 5
+  fireIncrementationPerSecond: 1

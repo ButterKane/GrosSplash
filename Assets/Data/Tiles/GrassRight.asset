@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83dd2a49eaa8c7a459bf69cd311b97a2, type: 3}
+  m_Name: GrassRight
+  m_EditorClassIdentifier: 
+  ID: 21
+  sprite: {fileID: 21300000, guid: 297a183866e9dc74a80c4b2e929d5dd2, type: 3}
+  visuals: {fileID: 147104111217629594, guid: cb4436b4809cdb5409005949be224a6b, type: 3}
+  inflammable: 1
+  hasCollisions: 1
+  fireStrengthToBeSetOnFire: 50
+  maxFireValue: 100
+  minFireValue: -20
+  fireIncrementationPerSecond: 1.5

@@ -1201,18 +1201,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 786493286656606165, guid: 650d4bb307d6de74295dffd918246184,
-        type: 3}
-      propertyPath: fireFX
-      value: 
-      objectReference: {fileID: 6769165330896596950, guid: 1e0e23aa665015f47ac757248ec6d447,
-        type: 3}
-    - target: {fileID: 786493286656606165, guid: 650d4bb307d6de74295dffd918246184,
-        type: 3}
-      propertyPath: extinguishFX
-      value: 
-      objectReference: {fileID: 5185983635554301341, guid: 621e146a5d13eda4ba09543ec06aec1b,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 650d4bb307d6de74295dffd918246184, type: 3}
 --- !u!1 &2007470054

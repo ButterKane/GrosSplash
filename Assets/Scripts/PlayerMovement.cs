@@ -17,15 +17,13 @@ public class PlayerMovement : MonoBehaviour
     public Transform self;
     public Rigidbody body;
     public float deadzone = 0.2f;
-    //public Animator playerAnim;
+    public Animator playerAnim;
     public Camera cam;
     public ParticleSystem highIntensityParticles;
     public ParticleSystem lowIntensityParticles;
 
     [Space(2)]
     [Header("General settings")]
-    public int inputIndex;
-    public Color playerColor;
     public float playerHeight = 2.2f;
     public int MaxHP;
 
@@ -187,16 +185,19 @@ public class PlayerMovement : MonoBehaviour
 
     void CheckMoveState()
     {
+        //print("vitesse: " + body.velocity.magnitude);
         if (moveState == MoveState.Blocked) { return; }
 
-        else if (body.velocity.magnitude <= minWalkSpeed)
+        if (body.velocity.magnitude <= minWalkSpeed)
         {
             if (moveState != MoveState.Idle)
             {
+                
                 body.velocity = new Vector3(0, body.velocity.y, 0);
             }
             customDrag = idleDrag;
             moveState = MoveState.Idle;
+            
         }
     }
 
@@ -238,6 +239,17 @@ public class PlayerMovement : MonoBehaviour
         myVel.y = body.velocity.y;
         body.velocity = myVel;
         speed = body.velocity.magnitude;
+
+        if (body.velocity.magnitude > minWalkSpeed)
+        {
+            print("bidou");
+            playerAnim.SetBool("Running?", true);
+        }
+        else
+        {
+            playerAnim.SetBool("Running?", false);
+        }
+
     }
 
     void ApplyDrag()

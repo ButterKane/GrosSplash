@@ -93,6 +93,10 @@ public class MenuSlotPlayers : MonoBehaviour
                 print("Credits");
                 canvasAnim.SetBool("In", true);
                 break;
+            case "Exit":
+                print("Exit");
+                Application.Quit();
+                break;
         }
     }
     

@@ -78,9 +78,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.66
-  m_Height: 3.16
+  m_Height: 3.34
   m_Direction: 1
-  m_Center: {x: 0, y: 2, z: 0}
+  m_Center: {x: 0, y: 1.91, z: 0}
 --- !u!54 &5366605155919943537
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -214,6 +214,7 @@ MonoBehaviour:
   actualHealth: 0
   fireStrength: 50
   navMesh: {fileID: 0}
+  animator: {fileID: 3166231813697059033}
 --- !u!114 &843800575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,23 +306,29 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 1bba198015bf13d4ea70f5925f92a7bd,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 1bba198015bf13d4ea70f5925f92a7bd,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 4
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 1bba198015bf13d4ea70f5925f92a7bd,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 3
+      value: 3.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bba198015bf13d4ea70f5925f92a7bd, type: 3}
 --- !u!4 &5006512735012296099 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 1bba198015bf13d4ea70f5925f92a7bd,
+    type: 3}
+  m_PrefabInstance: {fileID: 209272505}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3166231813697059033 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: 1bba198015bf13d4ea70f5925f92a7bd,
     type: 3}
   m_PrefabInstance: {fileID: 209272505}
   m_PrefabAsset: {fileID: 0}

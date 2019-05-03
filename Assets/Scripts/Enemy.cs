@@ -79,6 +79,7 @@ public class Enemy : MonoBehaviour
                     animator.SetTrigger("Throwing");
                     focusedTile = null;
                     actualAttackCD = attackCooldown;
+                    isFree = false;
                 }
             }
             else
@@ -91,12 +92,15 @@ public class Enemy : MonoBehaviour
             animator.SetBool("Running", false);
             focusedTile = null;
             actualAttackCD = attackCooldown;
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Throwing") || !animator.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
+            {
+                isFree = true;
+            }
         }
     }
 
     private void FleeFromPlayers()
     {
-
         foreach (PlayerMovement player in FindObjectsOfType<PlayerMovement>())
         {
             if (Vector3.Distance(player.transform.position, transform.position) < fleeDistance)
@@ -112,14 +116,17 @@ public class Enemy : MonoBehaviour
     }
 
 
-    public IEnumerator TakeDamage(float damage)
+    public IEnumerator WaitForAnimationToEnd(float damage)
     {
         isFree = false;
-        actualHealth -= damage;
         yield return new WaitForSeconds(0.2f);
         isFree = true;
     }
 
+     public void TakeDamage(float damage)
+    {
+        actualHealth -= damage;
+    }
     public void HitAnimationLaunch()
     {
         animator.SetTrigger("GettingHit");

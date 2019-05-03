@@ -19170,7 +19170,6 @@ MonoBehaviour:
     type: 3}
   impactParticles2: {fileID: 485656138712418587, guid: 805e7da6a48d61a43ba8e1a1f8240001,
     type: 3}
-  triggerColliders: []
   pushForce: 1
 --- !u!1 &3164988292695713017
 GameObject:
@@ -28959,7 +28958,6 @@ MonoBehaviour:
     type: 3}
   impactParticles2: {fileID: 485656138712418587, guid: 805e7da6a48d61a43ba8e1a1f8240001,
     type: 3}
-  triggerColliders: []
   pushForce: 1
 --- !u!1 &8009779572455117965
 GameObject:
@@ -33916,6 +33914,12 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   playerHeight: 2.2
   MaxHP: 100
+  lowIntensityWaterForce: 1
+  highIntensityWaterForce: 5
+  lowIntensityRayLength: 5
+  highIntensityRayLength: 5
+  lowIntensityWaterRaycastCount: 6
+  lowIntensityWaterRaycastSpace: 1
   playerIndex: 0
   axisMoveHorizontal: 
   axisMoveVertical: 

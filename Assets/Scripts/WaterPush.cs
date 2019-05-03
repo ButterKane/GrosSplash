@@ -9,6 +9,7 @@ public class WaterPush : MonoBehaviour
     public ParticleSystem impactParticles2;
 
     public float pushForce;
+    public float WaterDamage;
 
     private List<ParticleCollisionEvent> particlesCollisionEvents = new List<ParticleCollisionEvent>();
 
@@ -19,7 +20,6 @@ public class WaterPush : MonoBehaviour
 
     public void OnParticleCollision(GameObject other)
     {
-        print("Une particle touche");
         int colCount = particles.GetSafeCollisionEventSize();
 
         if (colCount > particlesCollisionEvents.Count)
@@ -58,6 +58,9 @@ public class WaterPush : MonoBehaviour
                 {
                     other.GetComponent<PlaySoundDrowning>().PlaySounds();
                 }
+
+                other.GetComponent<Enemy>().TakeDamage(WaterDamage); //Can be different for each shoot style, each player, even modified on runtime
+                other.GetComponent<Enemy>().HitAnimationLaunch();
             }
         }
     }

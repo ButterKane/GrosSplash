@@ -37,6 +37,11 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        if (transform.position.y < -500)
+        {
+            TakeDamage(10000);
+        }
+
         if (isFree && navMesh.enabled)
         {
             if (navMesh.destination != transform.position)

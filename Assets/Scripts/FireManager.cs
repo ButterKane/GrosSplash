@@ -5,6 +5,7 @@ using UnityEngine;
 public class FireManager : MonoBehaviour
 {
     [HideInInspector] GridManager gridManager;
+    public int fireNumber = 0;
 
     private void Awake()
     {

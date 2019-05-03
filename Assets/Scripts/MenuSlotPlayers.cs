@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuSlotPlayers : MonoBehaviour
 {
@@ -84,10 +85,12 @@ public class MenuSlotPlayers : MonoBehaviour
         switch (gameObject.name)
         {
             case "Level1":
+                SceneManager.LoadScene(1);
                 print("load level 1");
                 break;
             case "Level2":
                 print("load level 2");
+                SceneManager.LoadScene(2);
                 break;
             case "Credits":
                 print("Credits");

@@ -38,7 +38,7 @@ public class WaterPush : MonoBehaviour
             //Push back the object
             if (other.GetComponent<Rigidbody>() && (other.tag == "Movable" || other.tag == "Enemy" || other.tag == "Player"))
             {
-                other.GetComponent<Rigidbody>().AddForce(impactDirection * pushForce, ForceMode.Impulse);
+                other.GetComponent<Rigidbody>().AddForce(impactDirection * pushForce * 0.3f, ForceMode.Impulse);
             }
 
             if (other.tag == "Waterizable" || other.tag == "Movable" || other.tag == "Enemy" || other.tag == "Player")

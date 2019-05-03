@@ -281,6 +281,41 @@ PrefabInstance:
       propertyPath: TriggerModule.enter
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6224345840510100399, guid: 218a241db58f56849816014d9aa8d204,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.642
+      objectReference: {fileID: 0}
+    - target: {fileID: 6224345840510100399, guid: 218a241db58f56849816014d9aa8d204,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.18236
+      objectReference: {fileID: 0}
+    - target: {fileID: 6224345840510100399, guid: 218a241db58f56849816014d9aa8d204,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.18236
+      objectReference: {fileID: 0}
+    - target: {fileID: 6224345840510100399, guid: 218a241db58f56849816014d9aa8d204,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.18236
+      objectReference: {fileID: 0}
+    - target: {fileID: 2378375514569557161, guid: 218a241db58f56849816014d9aa8d204,
+        type: 3}
+      propertyPath: m_Name
+      value: Indicator
+      objectReference: {fileID: 0}
+    - target: {fileID: 8221973525910421818, guid: 218a241db58f56849816014d9aa8d204,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.00949901
+      objectReference: {fileID: 0}
+    - target: {fileID: 8221973525910421818, guid: 218a241db58f56849816014d9aa8d204,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 218a241db58f56849816014d9aa8d204, type: 3}
 --- !u!82 &8362924336468113364 stripped

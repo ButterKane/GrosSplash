@@ -207,11 +207,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   focusedTilesID: 010000000200000003000000040000000500000006000000070000001400000015000000
-  fleeSpeed: 10
-  normalSpeed: 5
+  fleeSpeed: 5
+  normalSpeed: 4
   fleeDistance: 10
-  attackCooldown: 5
-  maxHealth: 100
+  attackCooldown: 9
+  maxHealth: 40
   actualHealth: 0
   fireStrength: 20
   navMesh: {fileID: 2720026941743913410}

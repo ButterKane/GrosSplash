@@ -60,6 +60,7 @@ public class Tile : MonoBehaviour
         if (actualFire == null)
         {
             Debug.Log("igniting");
+            GameManager.i.fireManager.fireNumber++;
             actualFire = Instantiate(GameManager.i.library.fireFX, this.transform, true);
             actualFire.transform.localPosition = Vector3.zero;
             UpdateFire();
@@ -73,6 +74,7 @@ public class Tile : MonoBehaviour
         //Removes the firevisuals
         if (actualFire != null)
         {
+            GameManager.i.fireManager.fireNumber--;
             Destroy(actualFire.gameObject);
             GameObject extinguishFX = Instantiate(GameManager.i.library.extinguishFX, this.transform, true);
             extinguishFX.transform.localPosition = Vector3.zero;

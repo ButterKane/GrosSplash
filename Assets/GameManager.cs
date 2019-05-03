@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,9 +11,12 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Library library;
     [HideInInspector] LoaderSaverManager loadSaverManager;
 
+    public GameObject losePanel;
+    public GameObject winPanel;
     public GameObject player1Prefab;
     public int EnemiesToWin;
     public int EnemiesKilled;
+    public int fireCountToLose = 100;
 
     public bool gameStop;
 
@@ -25,18 +29,6 @@ public class GameManager : MonoBehaviour
         loadSaverManager = FindObjectOfType<LoaderSaverManager>();
     }
 
-    public void PlayLevel(string levelName)
-    {
-        loadSaverManager.LoadLevel(levelName);
-        ConvertLevelToPlayable();
-    }
-
-    public void PlayLevel()
-    {
-        loadSaverManager.LoadLevel();
-        ConvertLevelToPlayable();
-    }
-
     private void Update()
     {
         if(EnemiesKilled == EnemiesToWin && !gameStop)
@@ -44,44 +36,37 @@ public class GameManager : MonoBehaviour
             GameWin();
             gameStop = true;
         }
-        if (!gameStop) // Add the condition for loss
+        if (!gameStop && GameManager.i.fireManager.fireNumber >= fireCountToLose) // Add the condition for loss
         {
-            GameLose();
+            GameLost();
             gameStop = true;
         }
 
     }
 
-
-    //Convert a level from the editor to a playable one
-    public void ConvertLevelToPlayable()
-    {
-        //Removes the air tiles
-        for (int x = 0; x < gridManager.tileGrid.GetLength(0); x++)
-        {
-            for (int y = 0; y < gridManager.tileGrid.GetLength(1); y++)
-            {
-                if (gridManager.tileGrid[x,y].GetTileData().ID == 0)
-                {
-                    Destroy(gridManager.tileGrid[x, y].gameObject);
-                }
-            }
-        }
-
-        //Spawns the players
-        Instantiate(player1Prefab);
-
-        //Creates the camera
-
-    }
-
     public void GameWin()
     {
-
+        Instantiate(winPanel);
     }
 
     public void GameLost()
     {
+        Instantiate(losePanel);
+    }
 
+    public void GoToNextScene()
+    {
+        if (SceneManager.GetActiveScene().name == "Level1")
+        {
+            SceneManager.LoadScene(2);
+        }
+        else
+        {
+            SceneManager.LoadScene(0);
+        }
+    }
+    public void GoToMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }

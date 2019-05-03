@@ -7,7 +7,6 @@ public class WaterPush : MonoBehaviour
     public ParticleSystem particles;
     public ParticleSystem impactParticles;
     public ParticleSystem impactParticles2;
-    public Transform[] triggerColliders;    //Needs to be initialized with all the trigger of level
 
     public float pushForce;
 
@@ -17,23 +16,6 @@ public class WaterPush : MonoBehaviour
     // the trigger conditions each frame.
     private List<ParticleSystem.Particle> enterTriggerParticles = new List<ParticleSystem.Particle>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        particlesCollisionEvents = new List<ParticleCollisionEvent>();
-
-        for (int i = 0; i < triggerColliders.Length; i++)
-        {
-            particles.trigger.SetCollider(i, triggerColliders[i]); //Adds the referenced trigger to the list of trigger to check
-        }
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void OnParticleCollision(GameObject other)
     {
@@ -70,18 +52,6 @@ public class WaterPush : MonoBehaviour
             {
                 print("trigger enter");
             }
-        }
-    }
-
-    public void OnParticleTrigger()
-    {
-        // get the particles which matched the trigger conditions this frame
-        int numEnter = particles.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, enterTriggerParticles);
-
-        // iterate through the particles which entered the trigger
-        for (int i = 0; i < numEnter; i++)
-        {
-            // MAKE HERE WHAT YOU WANT WHEN ENTERING TRIGGER
         }
     }
 

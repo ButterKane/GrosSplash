@@ -30,6 +30,16 @@ public class PlayerMovement : MonoBehaviour
     public int MaxHP;
 
     [Space(2)]
+    [Header("Water settings")]
+    public float lowIntensityWaterForce = 1f;
+    public float highIntensityWaterForce = 5f;
+
+    public float lowIntensityRayLength = 5f;
+    public float highIntensityRayLength = 5f;
+
+    public int lowIntensityWaterRaycastCount = 6;
+    public float lowIntensityWaterRaycastSpace = 1;
+    [Space(2)]
     [Header("Multi settings")]
     public int playerIndex;
     public string axisMoveHorizontal, axisMoveVertical, axisAimHorizontal, axisAimVertical;
@@ -256,12 +266,57 @@ public class PlayerMovement : MonoBehaviour
 
     #region Actions
 
+    void CheckWateredTiles()
+    {
+        if (actualParticleSystem == highIntensityParticles)
+        {
+            RaycastHit[] hits;
+            hits = Physics.RaycastAll(highIntensityParticles.transform.position, highIntensityParticles.transform.forward, highIntensityRayLength);
+            Debug.DrawRay(highIntensityParticles.transform.position, highIntensityParticles.transform.forward * highIntensityRayLength, Color.green);
+
+            for (int i = 0; i < hits.Length; i++)
+            {
+                RaycastHit hit = hits[i];
+                Tile tile = hit.transform.GetComponent<Tile>();
+
+                if (tile)
+                {
+                    tile.fireValue -= highIntensityWaterForce;
+                    tile.UpdateFireScale();
+                }
+            }
+        }
+        else if (actualParticleSystem == lowIntensityParticles)
+        {
+            for (int i = 0; i < lowIntensityWaterRaycastCount; i++)
+            {
+                Vector3 endPosition = lowIntensityParticles.transform.forward * lowIntensityRayLength + lowIntensityParticles.transform.right * ((lowIntensityWaterRaycastCount / 2 - i));
+                Debug.DrawRay(lowIntensityParticles.transform.position, endPosition, Color.green);
+                RaycastHit[] hits;
+                hits = Physics.RaycastAll(lowIntensityParticles.transform.position, endPosition, lowIntensityRayLength);
+                for (int x = 0; x < hits.Length; x++)
+                {
+                    RaycastHit hit = hits[x];
+                    Tile tile = hit.transform.GetComponent<Tile>();
+
+                    if (tile)
+                    {
+                        tile.fireValue -= lowIntensityWaterForce;
+                        tile.UpdateFireScale();
+                    }
+                }
+            }
+        }
+    }
+
     void Shoot()
     {
         if (shootAble)
         {
             if (aim.magnitude>0.3f)
             {
+                CheckWateredTiles();
+                Debug.Log("Shooting");
                 actualParticleSystem.Play();
                 maxSpeed = maxSpeedShooting;
                 shooting = true;

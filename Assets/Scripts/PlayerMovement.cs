@@ -104,7 +104,7 @@ public class PlayerMovement : MonoBehaviour
     {
         highIntensityParticles.Stop();
         lowIntensityParticles.Stop();
-
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()

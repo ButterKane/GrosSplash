@@ -289,6 +289,10 @@ public class PlayerMovement : MonoBehaviour
             for (int i = 0; i < hits.Length; i++)
             {
                 RaycastHit hit = hits[i];
+                if (hit.transform.gameObject.GetComponentInChildren<Wall>() != null)
+                {
+                    return;
+                }
                 Tile tile = hit.transform.GetComponent<Tile>();
 
                 if (tile)
@@ -309,6 +313,10 @@ public class PlayerMovement : MonoBehaviour
                 for (int x = 0; x < hits.Length; x++)
                 {
                     RaycastHit hit = hits[x];
+                    if (hit.transform.gameObject.GetComponentInChildren<Wall>() != null)
+                    {
+                        return;
+                    }
                     Tile tile = hit.transform.GetComponent<Tile>();
 
                     if (tile)

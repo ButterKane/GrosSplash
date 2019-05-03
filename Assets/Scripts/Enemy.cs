@@ -59,11 +59,13 @@ public class Enemy : MonoBehaviour
             if ((focusedTile == null || focusedTile.fireValue > 0) && actualAttackCD <= 0)
             {
                 focusedTile = GameManager.i.gridManager.GetRandomExtinguishedTile(focusedTilesID[Random.Range(0, focusedTilesID.Length - 1)]);
+                if (focusedTile == null) { return; }
                 navMesh.SetDestination(focusedTile.transform.position);
                 NavMeshPath path = new NavMeshPath();
                 navMesh.CalculatePath(focusedTile.transform.position, path);
-                if (path.status == NavMeshPathStatus.PathPartial)
+                if (path.status == NavMeshPathStatus.PathPartial || path.status == NavMeshPathStatus.PathInvalid)
                 {
+                    Debug.Log("Can't reach destination");
                     focusedTile = null;
                 }
             }

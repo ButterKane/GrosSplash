@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 197f7b313225ba045829de9c7209f1a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  focusedTilesID: 03000000
+  focusedTilesID: 010000000200000003000000040000000500000006000000070000001400000015000000
   fleeSpeed: 40
   normalSpeed: 10
   fleeDistance: 10

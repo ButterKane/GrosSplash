@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2778479373422975547}
   - component: {fileID: 786493286656606165}
   m_Layer: 0
-  m_Name: Library
+  m_Name: P_Library
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,6 +57,9 @@ MonoBehaviour:
   xGuizmoMaterial: {fileID: 2100000, guid: f55ee62361914974489bf43c4b9619e0, type: 2}
   yGuizmoMaterial: {fileID: 2100000, guid: e47c7f8bdfbe65a4db88a6aa7dd3f6a8, type: 2}
   zGuizmoMaterial: {fileID: 2100000, guid: 6fdeeca86bd5b7d48b60b3893b8078a3, type: 2}
+  fireFX: {fileID: 6769165330896596950, guid: 1e0e23aa665015f47ac757248ec6d447, type: 3}
+  extinguishFX: {fileID: 5185983635554301341, guid: 621e146a5d13eda4ba09543ec06aec1b,
+    type: 3}
   tileList:
   - {fileID: 11400000, guid: b9e089543987bae438a4fef8b02cadf4, type: 2}
   - {fileID: 11400000, guid: b6184817c538d8a498f94e70fd43ff2c, type: 2}
@@ -66,6 +69,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d8e035168b698214b95a679215e41af7, type: 2}
   - {fileID: 11400000, guid: fc53271edd8fbdb46bafe8d8b676b225, type: 2}
   - {fileID: 11400000, guid: 7ad01721a48f72a49b49b260433fbb10, type: 2}
+  - {fileID: 11400000, guid: e17eb0dbc431da44cade92088fa16166, type: 2}
+  - {fileID: 11400000, guid: 96c1227012ce20247bd4d3aa605735b1, type: 2}
   wallList:
   - {fileID: 11400000, guid: b3c4d5a786de6e44983c1f4eca4de339, type: 2}
   - {fileID: 11400000, guid: c30886ad989321c44bd58711ed6d1d22, type: 2}
@@ -91,3 +96,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 67bf03c702c550e44ad85380fca0a226, type: 2}
   - {fileID: 11400000, guid: 524916ad892bac54b86b642187e45fec, type: 2}
   - {fileID: 11400000, guid: 3f20bc7b827082b4ba586b2b26dbf01f, type: 2}
+  isEditor: 0

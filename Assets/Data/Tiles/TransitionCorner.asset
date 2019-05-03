@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ID: 5
   sprite: {fileID: 21300000, guid: 3d4e8186c6a00434ea77a3c403fce58e, type: 3}
-  visuals: {fileID: 2350080007365819866, guid: 85e557db0a2bfb743bb696ce9ff8ec80, type: 3}
+  visuals: {fileID: 3793837141298159143, guid: 85e557db0a2bfb743bb696ce9ff8ec80, type: 3}
   inflammable: 0
   hasCollisions: 1
   fireStrengthToBeSetOnFire: 80

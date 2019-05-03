@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Wall
   m_EditorClassIdentifier: 
   ID: 100
-  visuals: {fileID: 3603026181324433130, guid: c53b010f6852fcc4585bda2ba6d75c11, type: 3}
+  visuals: {fileID: 4292207417051867084, guid: c53b010f6852fcc4585bda2ba6d75c11, type: 3}
   inflammable: 0
   sprite: {fileID: 21300000, guid: bfe05886d337bfe429d35c551d8de66e, type: 3}
   fireIsolation: 100

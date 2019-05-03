@@ -8,13 +8,7 @@ public class Tile : MonoBehaviour
     public GameObject actualFire;
     public float fireValue;
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.tag == "Water")
-        {
-            fireValue -= 1;
-        }
-    }
+
 
     private void Awake()
     {
@@ -22,20 +16,28 @@ public class Tile : MonoBehaviour
         InvokeRepeating("UpdateFire", 0f, 1f);
     }
 
+    public void UpdateFireScale()
+    {
+        if (actualFire != null)
+        {
+            if (fireValue > 0)
+            {
+                float fireScale = fireValue / 100;
+                fireScale = Mathf.Clamp(fireScale, 0, 1);
+                foreach (Transform t in actualFire.transform)
+                {
+                    t.localScale = new Vector3(fireScale, fireScale, fireScale);
+                }
+            }
+        }
+    }
     private void UpdateFire()
     {
         if (fireValue > 0)
         {
             fireValue += tileData.fireIncrementationPerSecond;
             TrySpreadFire();
-            if (actualFire != null)
-            {
-                float fireScale = fireValue / 100;
-                foreach (Transform t in actualFire.transform)
-                {
-                    t.localScale = new Vector3(fireScale, fireScale, fireScale);
-                }
-            }
+            UpdateFireScale();
         }
         else
         {
@@ -54,8 +56,12 @@ public class Tile : MonoBehaviour
         if (!GetTileData().inflammable) { return; }
         fireValue++;
         //Generates firevisuals
-        actualFire = Instantiate(GameManager.i.library.fireFX, this.transform, true);
-        actualFire.transform.localPosition = Vector3.zero;
+        if (actualFire == null)
+        {
+            actualFire = Instantiate(GameManager.i.library.fireFX, this.transform, true);
+            actualFire.transform.localPosition = Vector3.zero;
+            UpdateFire();
+        }
     }
 
     //Extinguish the fire on the actual tile
@@ -65,9 +71,9 @@ public class Tile : MonoBehaviour
         //Removes the firevisuals
         if (actualFire != null)
         {
+            Destroy(actualFire.gameObject);
             GameObject extinguishFX = Instantiate(GameManager.i.library.extinguishFX, this.transform, true);
             extinguishFX.transform.localPosition = Vector3.zero;
-            Destroy(actualFire.gameObject);
         }
     }
 

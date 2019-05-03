@@ -9,6 +9,7 @@ public class MenuSlotPlayers : MonoBehaviour
     public Renderer myQuadRend;
     public float timeToCharge;
     public float timeToDecharge;
+    public Animator canvasAnim;
     int playersOnSlot;
     bool chargingSlot;
     [HideInInspector]
@@ -46,19 +47,15 @@ public class MenuSlotPlayers : MonoBehaviour
             myQuadRend.material.SetFloat("_LerpValue", lerpValue);
             if (lerpValue >= 1)
             {
-                switch (gameObject.name)
-                {
-                    case "Level1":
-                        break;
-                    case "Level2":
-                        break;
-                    case "Credits":
-                        break;
-                }
+                DoingSlotEffect();
             }
         }
         else if (!chargingSlot && lerpValue > 0)
         {
+            if (lerpValue >= 1)
+            {
+                UndoSlotEffect();
+            }
             lerpValue = Mathf.Clamp01(lerpValue - (Time.deltaTime / timeToDecharge));
             myQuadRend.material.SetFloat("_LerpValue", lerpValue);
         }
@@ -82,8 +79,28 @@ public class MenuSlotPlayers : MonoBehaviour
         }
     }
 
-    void ChargeLevel()
+    void DoingSlotEffect()
     {
-
+        switch (gameObject.name)
+        {
+            case "Level1":
+                print("load level 1");
+                break;
+            case "Level2":
+                print("load level 2");
+                break;
+            case "Credits":
+                print("Credits");
+                canvasAnim.SetBool("In", true);
+                break;
+        }
+    }
+    
+    void UndoSlotEffect()
+    {
+        if(gameObject.name == "Credits")
+        {
+            canvasAnim.SetBool("In", false);
+        }
     }
 }

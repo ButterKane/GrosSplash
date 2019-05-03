@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using System;
 
 public class GridManager : MonoBehaviour
 {
@@ -16,10 +18,46 @@ public class GridManager : MonoBehaviour
     {
         library = FindObjectOfType<Library>();
         globalFunctions = FindObjectOfType<GlobalFunctions>();
+        FindGridAndWallsValues();
+    }
+
+    public void FindGridAndWallsValues()
+    {
+        Vector2Int tempGridSize = new Vector2Int(0, 0);
+        Tile[] allTiles = FindObjectsOfType<Tile>();
+        foreach (Tile tile in allTiles)
+        {
+            if (tile.coordinates.x+1 > tempGridSize.x)
+            {
+                tempGridSize.x = tile.coordinates.x+1;
+            }
+            if (tile.coordinates.y+1 > tempGridSize.y)
+            {
+                tempGridSize.y = tile.coordinates.y+1;
+            }
+        }
+        tileGrid = new Tile[tempGridSize.x, tempGridSize.y];
+        foreach (Tile tile in allTiles)
+        {
+            tileGrid[tile.coordinates.x, tile.coordinates.y] = tile;
+        }
+        FindWallsValues(tempGridSize);
+    }
+
+    public void FindWallsValues(Vector2Int gridSize)
+    {
+        Wall[] allWalls = FindObjectsOfType<Wall>();
+        wallGrid = new Wall[gridSize.x, gridSize.y];
+        foreach (Wall wall in allWalls)
+        {
+            wallGrid[wall.coordinates.x, wall.coordinates.y] = wall;
+        }
     }
 
     public void GenerateGridUsingSave(Save save)
     {
+        tileGrid = null;
+        wallGrid = null;
         propList.Clear();
         Vector2Int gridSize = new Vector2Int(save.tileGrid[0].Length, save.tileGrid[1].Length);
         GenerateGrid(gridSize, save.tileSize);
@@ -136,5 +174,39 @@ public class GridManager : MonoBehaviour
             Destroy(wallGrid[coordinates.x, coordinates.y].gameObject);
             wallGrid[coordinates.x, coordinates.y] = null;
         }
+    }
+
+    public void Shuffle<T>(System.Random random, T[,] array)
+    {
+        int lengthRow = array.GetLength(1);
+
+        for (int i = array.Length - 1; i > 0; i--)
+        {
+            int i0 = i / lengthRow;
+            int i1 = i % lengthRow;
+
+            int j = random.Next(i + 1);
+            int j0 = j / lengthRow;
+            int j1 = j % lengthRow;
+
+            T temp = array[i0, i1];
+            array[i0, i1] = array[j0, j1];
+            array[j0, j1] = temp;
+        }
+    }
+
+    public Tile GetRandomExtinguishedTile(int tileID)
+    {
+        System.Random rnd = new System.Random();
+        Tile[,] shuffledTileGrid = (Tile[,])tileGrid.Clone();
+        Shuffle(rnd, shuffledTileGrid);
+        foreach (Tile tile in shuffledTileGrid)
+        {
+            if (tile.GetTileData().ID == tileID && tile.fireValue <= 0)
+            {
+                return tile;
+            }
+        }
+        return null;
     }
 }

@@ -9,6 +9,7 @@ public class WaterPush : MonoBehaviour
     public ParticleSystem impactParticles2;
 
     public float pushForce;
+    public float WaterDamage;
 
     private List<ParticleCollisionEvent> particlesCollisionEvents = new List<ParticleCollisionEvent>();
 
@@ -19,7 +20,6 @@ public class WaterPush : MonoBehaviour
 
     public void OnParticleCollision(GameObject other)
     {
-        print("Une particle touche");
         int colCount = particles.GetSafeCollisionEventSize();
 
         if (colCount > particlesCollisionEvents.Count)
@@ -36,16 +36,17 @@ public class WaterPush : MonoBehaviour
             Vector3 impactDirection = new Vector3(impactDirectionX, 0f, impactDirectionZ).normalized;
 
             //Push back the object
-            if (other.GetComponent<Rigidbody>() && (other.tag == "Movable" || other.tag == "Enemy"))
+            if (other.GetComponent<Rigidbody>() && (other.tag == "Movable" || other.tag == "Enemy" || other.tag == "Player"))
             {
                 other.GetComponent<Rigidbody>().AddForce(impactDirection * pushForce, ForceMode.Impulse);
             }
 
-            if (other.tag == "Waterizable" || other.tag == "Movable" || other.tag == "Enemy")
+            if (other.tag == "Waterizable" || other.tag == "Movable" || other.tag == "Enemy" || other.tag == "Player")
             {
                 //Spawn impact particles
                 Instantiate(impactParticles, particlesCollisionEvents[i].intersection, Quaternion.identity);
                 Instantiate(impactParticles2, particlesCollisionEvents[i].intersection, Quaternion.identity);
+
             }
 
 
@@ -57,6 +58,9 @@ public class WaterPush : MonoBehaviour
                 {
                     other.GetComponent<PlaySoundDrowning>().PlaySounds();
                 }
+
+                other.GetComponent<Enemy>().TakeDamage(WaterDamage); //Can be different for each shoot style, each player, even modified on runtime
+                other.GetComponent<Enemy>().HitAnimationLaunch();
             }
         }
     }

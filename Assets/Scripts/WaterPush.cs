@@ -44,8 +44,8 @@ public class WaterPush : MonoBehaviour
             if (other.tag == "Waterizable" || other.tag == "Movable" || other.tag == "Enemy" || other.tag == "Player")
             {
                 //Spawn impact particles
-                //Instantiate(impactParticles, particlesCollisionEvents[i].intersection, Quaternion.identity);
-                //Instantiate(impactParticles2, particlesCollisionEvents[i].intersection, Quaternion.identity);
+                Instantiate(impactParticles, particlesCollisionEvents[i].intersection, Quaternion.identity);
+                Instantiate(impactParticles2, particlesCollisionEvents[i].intersection, Quaternion.identity);
 
             }
 
@@ -53,6 +53,7 @@ public class WaterPush : MonoBehaviour
             if (other.tag == "Enemy")
             {
                 AudioSource tempAudioSource = other.GetComponent<AudioSource>();
+                print("initiate drown");
                 if(!tempAudioSource.isPlaying)
                 {
                     other.GetComponent<PlaySoundDrowning>().PlaySounds();

@@ -135,6 +135,7 @@ public class Enemy : MonoBehaviour
         actualHealth -= damage;
         if (actualHealth <= 0)
         {
+            GameManager.i.EnemiesKilled++;
             Destroy(this.gameObject);
         }
     }

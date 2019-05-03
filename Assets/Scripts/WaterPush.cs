@@ -36,16 +36,17 @@ public class WaterPush : MonoBehaviour
             Vector3 impactDirection = new Vector3(impactDirectionX, 0f, impactDirectionZ).normalized;
 
             //Push back the object
-            if (other.GetComponent<Rigidbody>() && (other.tag == "Movable" || other.tag == "Enemy"))
+            if (other.GetComponent<Rigidbody>() && (other.tag == "Movable" || other.tag == "Enemy" || other.tag == "Player"))
             {
                 other.GetComponent<Rigidbody>().AddForce(impactDirection * pushForce, ForceMode.Impulse);
             }
 
-            if (other.tag == "Waterizable" || other.tag == "Movable" || other.tag == "Enemy")
+            if (other.tag == "Waterizable" || other.tag == "Movable" || other.tag == "Enemy" || other.tag == "Player")
             {
                 //Spawn impact particles
                 Instantiate(impactParticles, particlesCollisionEvents[i].intersection, Quaternion.identity);
                 Instantiate(impactParticles2, particlesCollisionEvents[i].intersection, Quaternion.identity);
+
             }
 
 

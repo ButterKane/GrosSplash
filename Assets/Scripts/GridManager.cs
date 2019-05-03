@@ -36,7 +36,6 @@ public class GridManager : MonoBehaviour
                 tempGridSize.y = tile.coordinates.y+1;
             }
         }
-        Debug.Log(tempGridSize);
         tileGrid = new Tile[tempGridSize.x, tempGridSize.y];
         foreach (Tile tile in allTiles)
         {

@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     public Camera cam;
     public ParticleSystem highIntensityParticles;
     public ParticleSystem lowIntensityParticles;
+    public AudioSource audioSource;
 
     [Space(2)]
     [Header("General settings")]
@@ -47,6 +48,10 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement settings")]
     public MoveState moveState;
     public AnimationCurve accelerationCurve;
+
+    [Space(2)]
+    [Header("Sounds settings")]
+    public List<PlayerSoundsClass> soundsList;
 
     [Tooltip("Minimum required speed to go to walking state")] public float minWalkSpeed = 0.1f;
     public float maxSpeedIdle = 9;
@@ -252,12 +257,20 @@ public class PlayerMovement : MonoBehaviour
 
         if (body.velocity.magnitude > minWalkSpeed)
         {
-            print("bidou");
             playerAnim.SetBool("Running?", true);
+            if (!audioSource.isPlaying)
+            {
+                audioSource.clip = soundsList[2].clip; //A faire mieux
+                audioSource.Play();
+            }
         }
         else
         {
             playerAnim.SetBool("Running?", false);
+            if (audioSource.isPlaying && audioSource.clip == soundsList[2].clip)
+            {
+                audioSource.Stop();
+            }
         }
 
     }
@@ -347,6 +360,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Shoot()
     {
+        AudioSource actualWaterAudio = actualParticleSystem.GetComponent<AudioSource>();
         if (shootAble)
         {
             if (aim.magnitude>0.3f)
@@ -356,6 +370,11 @@ public class PlayerMovement : MonoBehaviour
                 actualParticleSystem.Play();
                 maxSpeed = maxSpeedShooting;
                 shooting = true;
+                
+                if(!actualWaterAudio.isPlaying)
+                { 
+                    actualWaterAudio.Play();
+                }
                 //playerAnim.SetBool("Shooting", true);
             }
             else
@@ -363,6 +382,8 @@ public class PlayerMovement : MonoBehaviour
                 actualParticleSystem.Stop();
                 maxSpeed = maxSpeedIdle;
                 shooting = false;
+
+                actualWaterAudio.Stop();
                 //playerAnim.SetBool("Shooting", false);
             }
         }
@@ -370,6 +391,8 @@ public class PlayerMovement : MonoBehaviour
         {
             actualParticleSystem.Stop();
             shooting = false;
+
+            actualWaterAudio.Stop();
             //playerAnim.SetBool("Shooting", false);
         }
     }

@@ -36,7 +36,6 @@ MonoBehaviour:
     type: 3}
   impactParticles2: {fileID: 485656138712418587, guid: 805e7da6a48d61a43ba8e1a1f8240001,
     type: 3}
-  triggerColliders: []
   pushForce: 1
 --- !u!1001 &4231905433245943374
 PrefabInstance:
@@ -107,9 +106,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8061476558589672421, guid: 218a241db58f56849816014d9aa8d204,
         type: 3}
-      propertyPath: playerAnim
+      propertyPath: soundsList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8061476558589672421, guid: 218a241db58f56849816014d9aa8d204,
+        type: 3}
+      propertyPath: audioSource
       value: 
-      objectReference: {fileID: 4231905432603334792}
+      objectReference: {fileID: 251000096462512265}
     - target: {fileID: 8061476558589672421, guid: 218a241db58f56849816014d9aa8d204,
         type: 3}
       propertyPath: playerIndex
@@ -204,6 +208,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 218a241db58f56849816014d9aa8d204, type: 3}
+--- !u!82 &251000096462512265 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: -5061759198084782393, guid: 218a241db58f56849816014d9aa8d204,
+    type: 3}
+  m_PrefabInstance: {fileID: 4231905433245943374}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1585350095786768662 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3223156845236191064, guid: 218a241db58f56849816014d9aa8d204,

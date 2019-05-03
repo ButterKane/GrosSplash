@@ -10,7 +10,7 @@ public class WaterPush : MonoBehaviour
 
     public float pushForce;
 
-    private List<ParticleCollisionEvent> particlesCollisionEvents;
+    private List<ParticleCollisionEvent> particlesCollisionEvents = new List<ParticleCollisionEvent>();
 
     // these lists are used to contain the particles which match
     // the trigger conditions each frame.
@@ -36,21 +36,28 @@ public class WaterPush : MonoBehaviour
             Vector3 impactDirection = new Vector3(impactDirectionX, 0f, impactDirectionZ).normalized;
 
             //Push back the object
-            if (other.GetComponent<Rigidbody>() && other.tag == "Movable")
+            if (other.GetComponent<Rigidbody>() && (other.tag == "Movable" || other.tag == "Enemy" || other.tag == "Player"))
             {
                 other.GetComponent<Rigidbody>().AddForce(impactDirection * pushForce, ForceMode.Impulse);
             }
 
-            if (other.tag == "Waterizable" || other.tag == "Movable")
+            if (other.tag == "Waterizable" || other.tag == "Movable" || other.tag == "Enemy" || other.tag == "Player")
             {
                 //Spawn impact particles
                 Instantiate(impactParticles, particlesCollisionEvents[i].intersection, Quaternion.identity);
                 Instantiate(impactParticles2, particlesCollisionEvents[i].intersection, Quaternion.identity);
+
             }
 
-            if (other.tag == "Debug")
+
+            if (other.tag == "Enemy")
             {
-                print("trigger enter");
+                AudioSource tempAudioSource = other.GetComponent<AudioSource>();
+                print("initiate drown");
+                if(!tempAudioSource.isPlaying)
+                {
+                    other.GetComponent<PlaySoundDrowning>().PlaySounds();
+                }
             }
         }
     }
